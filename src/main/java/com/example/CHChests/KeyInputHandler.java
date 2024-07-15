@@ -68,8 +68,8 @@ public class KeyInputHandler {
                             world.getBlockState(new BlockPos(x + 2, y + 1, z)).getBlock() == Blocks.dark_oak_stairs){
                         BlockPos pos1 = new BlockPos(x, y - 8, z + 1);
                         BlockPos pos2 = new BlockPos(x, y + 8, z + 1);
-                        blockTextMap.put(pos1,"King 1");
-                        blockTextMap.put(pos2,"King 2");
+                        blockTextMap.put(pos1,"Goblin King Tower 1");
+                        blockTextMap.put(pos2,"Goblin King Tower 2");
                     }
 
                     //Queen structure
@@ -77,8 +77,8 @@ public class KeyInputHandler {
                             world.getBlockState(new BlockPos(x - 19, y - 1, z - 7)).getBlock() == Blocks.cauldron){
                         BlockPos pos1 = new BlockPos(x - 10, y + 1, z + 6);
                         BlockPos pos2 = new BlockPos(x - 40, y - 18, z + 29);
-                        blockTextMap.put(pos1,"Queen 1");
-                        blockTextMap.put(pos2,"Queen 2");
+                        blockTextMap.put(pos1,"Goblin Queen's Den 1");
+                        blockTextMap.put(pos2,"Goblin Queen's Den 2");
                     }
 
                     //Corleone Hideout
