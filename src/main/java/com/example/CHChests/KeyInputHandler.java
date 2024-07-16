@@ -29,17 +29,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class KeyInputHandler {
     private Map<BlockPos, String> blockTextMap = new HashMap<BlockPos, String>();
+    private Set<BlockPos> processedPositions = new HashSet<BlockPos>();
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (KeyBindings.clearChests.isPressed()) blockTextMap.clear();
+        if (KeyBindings.clearChests.isPressed()) {blockTextMap.clear(); processedPositions.clear();}
         if(!KeyBindings.findChests.isPressed()) return;
 
         System.out.println("LOOKING FOR CHESTS");
@@ -55,7 +53,7 @@ public class KeyInputHandler {
         //precursor top
         BlockPos endPos = new BlockPos(823, 188, 823);
 
-        blockTextMap.clear();
+//        blockTextMap.clear();
 
         BlockPos ignoreStartPos = new BlockPos(463, 60, 462); //nuc jungle bottom: 463 60 462
         BlockPos ignoreEndPos = new BlockPos(564, 188, 565); //nuc prec top: 564 188 565
@@ -77,6 +75,12 @@ public class KeyInputHandler {
                     BlockPos pos = new BlockPos(x, y, z);
                     if (world.getBlockState(pos).getBlock() == Blocks.stone) continue;
                     if (world.getBlockState(pos).getBlock() == Blocks.air) continue;
+
+                    if (processedPositions.contains(pos)) {
+                        continue;
+                    }
+
+                    processedPositions.add(pos);
 
                     //King structure
                     if (world.getBlockState(pos).getBlock() == Blocks.wool &&
@@ -157,7 +161,7 @@ public class KeyInputHandler {
                             world.getBlockState(new BlockPos(x - 6, y + 2,  z)).getBlock() == Blocks.stone_slab) {
 
                         BlockPos pos1 = new BlockPos(x - 4, y + 1,  z);
-                        BlockPos pos2 = new BlockPos(x - 19, y - 6,  z - 5);
+                        BlockPos pos2 = new BlockPos(x - 9, y - 6,  z - 5);
 
                         blockTextMap.put(pos1,"Dragon Skull 1");
                         blockTextMap.put(pos2,"Dragon Skull 2");
@@ -242,13 +246,123 @@ public class KeyInputHandler {
 
                     }
 
+                    //Using Generator.py
 
+                    //Ruins
+                    if (world.getBlockState(pos).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x, y, z + -7)).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x + -6, y + -1, z + -12)).getBlock() == Blocks.cauldron){
+                        BlockPos pos1 = new BlockPos(x + -6, y + -1, z + 5);
+                        blockTextMap.put(pos1, "Ruins 1");
+                        BlockPos pos2 = new BlockPos(x + -16, y + 28, z + 5);
+                        blockTextMap.put(pos2, "Ruins 2");
+                    }
 
-                    //Corleone Hideout
-//                           if (world.getBlockState(pos).getBlock() == Blocks.stonebrick) {
-//                               System.out.println("stonebrick found at: " + pos);
-//                           }
+                    //Precursor Tall Pillars 659 130 578
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 2, y + -1, z + 13)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -20, y + 6, z + 33)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -1, y + 8, z + 42)).getBlock() == Blocks.sea_lantern){
+                        BlockPos pos1 = new BlockPos(x + -6, y + -1, z + 1);
+                        blockTextMap.put(pos1, "Precursor Tall Pillars 1");
+                        BlockPos pos2 = new BlockPos(x + -25, y + 19, z + 41);
+                        blockTextMap.put(pos2, "Precursor Tall Pillars 2");
+                    }
 
+                    //Colored Skull Puzzle 584 108 728
+                    if (world.getBlockState(pos).getBlock() == Blocks.lapis_block &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 2)).getBlock() == Blocks.bedrock &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 4)).getBlock() == Blocks.redstone_block &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 2)).getBlock() == Blocks.gold_block &&
+                            world.getBlockState(new BlockPos(x + 0, y + 2, z + 2)).getBlock() == Blocks.bedrock &&
+                            world.getBlockState(new BlockPos(x + 0, y + 3, z + 2)).getBlock() == Blocks.quartz_block){
+                        BlockPos pos1 = new BlockPos(x + 6, y + -1, z + 2);
+                        blockTextMap.put(pos1, "Colored Skull Puzzle 1");
+                    }
+
+                    //Corleone Lakefront 624 98 455
+                    if (world.getBlockState(pos).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 0)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -4, y + 8, z + 0)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -4, y + 7, z + 2)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + -4, y + 7, z + -2)).getBlock() == Blocks.log){
+                        BlockPos pos1 = new BlockPos(x + 1, y + -3, z + -1);
+                        blockTextMap.put(pos1, "Corleone Lakefront 1");
+                        BlockPos pos2 = new BlockPos(x + 36, y + -14, z + 25);
+                        blockTextMap.put(pos2, "Corleone Lakefront 2");
+                    }
+
+                    //Colosseum 615 139 466
+                    if (world.getBlockState(pos).getBlock() == Blocks.noteblock &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -5)).getBlock() == Blocks.piston &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + -6)).getBlock() == Blocks.piston &&
+                            world.getBlockState(new BlockPos(x + 1, y + 1, z + -6)).getBlock() == Blocks.piston &&
+                            world.getBlockState(new BlockPos(x + 9, y + 0, z + 4)).getBlock() == Blocks.cauldron){
+                        BlockPos pos1 = new BlockPos(x + 13, y + 0, z + 1);
+                        blockTextMap.put(pos1, "Colosseum 1");
+                    }
+
+                    //Crystal Train 668 124 515
+                    if (world.getBlockState(pos).getBlock() == Blocks.dark_oak_fence_gate &&
+                            world.getBlockState(new BlockPos(x + 7, y + 0, z + 0)).getBlock() == Blocks.dark_oak_fence_gate &&
+                            world.getBlockState(new BlockPos(x + 7, y + -2, z + 0)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + 8, y + -2, z + 0)).getBlock() == Blocks.carpet){
+                        BlockPos pos1 = new BlockPos(x + 3, y + 1, z + 0);
+                        blockTextMap.put(pos1, "Crystal Train 1");
+                        BlockPos pos2 = new BlockPos(x + -4, y + 1, z + 0);
+                        blockTextMap.put(pos2, "Crystal Train 2");
+                    }
+
+                    //Big Automaton 672 163 635
+                    if (world.getBlockState(pos).getBlock() == Blocks.dropper &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + 0)).getBlock() == Blocks.dispenser &&
+                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 0)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + 1, y + -1, z + 0)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -3, y + 1, z + 1)).getBlock() == Blocks.tripwire_hook){
+                        BlockPos pos1 = new BlockPos(x + -3, y + 0, z + 0);
+                        blockTextMap.put(pos1, "Big Automaton 1");
+                        BlockPos pos2 = new BlockPos(x + 18, y + -13, z + 21);
+                        blockTextMap.put(pos2, "Big Automaton 2");
+                    }
+
+                    //Mansion 582 92 547
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -1)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + 0)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 0)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + -4, y + 0, z + 7)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 2, y + 0, z + -7)).getBlock() == Blocks.cobblestone_wall){
+                        BlockPos pos1 = new BlockPos(x + 0, y + 2, z + 0);
+                        blockTextMap.put(pos1, "Mansion 1");
+                        BlockPos pos2 = new BlockPos(x + 0, y + -20, z + 13);
+                        blockTextMap.put(pos2, "Mansion 2");
+                    }
+
+                    //Precursor Trapped Dungeon 602 84 580
+                    if (world.getBlockState(pos).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 1)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -1, y + 3, z + 2)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + 4, y + 3, z + 2)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + 0)).getBlock() == Blocks.iron_bars){
+                        BlockPos pos1 = new BlockPos(x + 2, y + 0, z + -4);
+                        blockTextMap.put(pos1, "Precursor Trapped Dungeon 1");
+                    }
+
+                    //Precursor Tower 611 102 655
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -3, y + 1, z + 10)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + -3, y + 2, z + 10)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + -3, y + 3, z + 10)).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x + 3, y + 1, z + 10)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + 3, y + 2, z + 10)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + 3, y + 3, z + 10)).getBlock() == Blocks.cauldron){
+                        BlockPos pos1 = new BlockPos(x + 3, y + 1, z + 2);
+                        blockTextMap.put(pos1, "Precursor Tower 1");
+                        BlockPos pos2 = new BlockPos(x + 6, y + -16, z + 13);
+                        blockTextMap.put(pos2, "Precursor Tower 2");
+                    }
 
                 }
             }
