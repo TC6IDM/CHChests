@@ -45,6 +45,11 @@ public class KeyInputHandler {
         System.out.println("LOOKING FOR CHESTS");
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
         World world = player.worldObj;
+
+        BlockPos playerPos = player.getPosition();
+        int searchRadius = 100;
+        int searchRadiusSquared = searchRadius * searchRadius;
+
         //jungle bottom
         BlockPos startPos = new BlockPos(202, 31, 202);
         //precursor top
@@ -52,11 +57,26 @@ public class KeyInputHandler {
 
         blockTextMap.clear();
 
+        BlockPos ignoreStartPos = new BlockPos(463, 60, 462); //nuc jungle bottom: 463 60 462
+        BlockPos ignoreEndPos = new BlockPos(564, 188, 565); //nuc prec top: 564 188 565
+
         for (int x = startPos.getX(); x <= endPos.getX(); x++) {
             for (int y = startPos.getY(); y <= endPos.getY(); y++) {
                 for (int z = startPos.getZ(); z <= endPos.getZ(); z++) {
-                    BlockPos pos = new BlockPos(x, y, z);
 
+                    double dx = x - playerPos.getX();
+                    double dy = y - playerPos.getY();
+                    double dz = z - playerPos.getZ();
+                    double distanceSquared = dx * dx + dy * dy + dz * dz;
+                    if (distanceSquared > searchRadiusSquared) continue;
+
+                    if (x >= ignoreStartPos.getX() && x <= ignoreEndPos.getX() &&
+                            y >= ignoreStartPos.getY() && y <= ignoreEndPos.getY() &&
+                            z >= ignoreStartPos.getZ() && z <= ignoreEndPos.getZ()) continue;
+
+                    BlockPos pos = new BlockPos(x, y, z);
+                    if (world.getBlockState(pos).getBlock() == Blocks.stone) continue;
+                    if (world.getBlockState(pos).getBlock() == Blocks.air) continue;
 
                     //King structure
                     if (world.getBlockState(pos).getBlock() == Blocks.wool &&
@@ -66,8 +86,10 @@ public class KeyInputHandler {
                             world.getBlockState(new BlockPos(x + 2, y, z)).getBlock() == Blocks.log2 &&
                             world.getBlockState(new BlockPos(x - 2, y + 1, z)).getBlock() == Blocks.dark_oak_stairs &&
                             world.getBlockState(new BlockPos(x + 2, y + 1, z)).getBlock() == Blocks.dark_oak_stairs){
+
                         BlockPos pos1 = new BlockPos(x, y - 8, z + 1);
                         BlockPos pos2 = new BlockPos(x, y + 8, z + 1);
+
                         blockTextMap.put(pos1,"Goblin King Tower 1");
                         blockTextMap.put(pos2,"Goblin King Tower 2");
                     }
@@ -75,11 +97,152 @@ public class KeyInputHandler {
                     //Queen structure
                     if (world.getBlockState(pos).getBlock() == Blocks.cauldron &&
                             world.getBlockState(new BlockPos(x - 19, y - 1, z - 7)).getBlock() == Blocks.cauldron){
+
                         BlockPos pos1 = new BlockPos(x - 10, y + 1, z + 6);
                         BlockPos pos2 = new BlockPos(x - 40, y - 18, z + 29);
+
                         blockTextMap.put(pos1,"Goblin Queen's Den 1");
                         blockTextMap.put(pos2,"Goblin Queen's Den 2");
                     }
+
+                    //Goblin Sewer Camp
+                    if (world.getBlockState(pos).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x, y + 1,  z)).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x-1, y,  z)).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x-1, y + 1, z)).getBlock() == Blocks.iron_bars &&
+                            world.getBlockState(new BlockPos(x, y - 1, z)).getBlock() == Blocks.soul_sand &&
+                            world.getBlockState(new BlockPos(x - 1, y - 1, z)).getBlock() == Blocks.soul_sand &&
+                            world.getBlockState(new BlockPos(x - 2, y, z)).getBlock() == Blocks.stonebrick &&
+                            world.getBlockState(new BlockPos(x - 2, y + 1, z)).getBlock() == Blocks.stonebrick) {
+
+                        BlockPos pos1 = new BlockPos(x + 2, y, z + 1);
+                        blockTextMap.put(pos1,"Goblin Sewer Camp 1");
+
+                    }
+
+                    //Deep Goblin Lair
+                    if (world.getBlockState(pos).getBlock() == Blocks.trapdoor && // 402 103 731
+                            world.getBlockState(new BlockPos(x, y + 1,  z)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x, y + 2,  z)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x, y + 1, z - 1)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x, y + 1, z + 1)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x, y + 2, z - 1)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x, y + 2, z + 1)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x, y, z - 1)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x, y, z + 1)).getBlock() == Blocks.dark_oak_stairs){
+
+                        BlockPos pos1 = new BlockPos(x - 42, y + 54, z - 23); // 360 157 708
+                        BlockPos pos2 = new BlockPos(x , y - 2, z + 6); //402 101 737
+                        BlockPos pos3 = new BlockPos(x - 25, y - 17, z - 35); //377 86 696
+
+                        blockTextMap.put(pos1,"Deep Goblin Lair 1");
+                        blockTextMap.put(pos2,"Deep Goblin Lair 2");
+                        blockTextMap.put(pos3,"Deep Goblin Lair 3");
+                    }
+
+                    //Tiny Hut
+                    if ((world.getBlockState(pos).getBlock() == Blocks.daylight_detector || world.getBlockState(pos).getBlock() == Blocks.daylight_detector_inverted) &&
+                            world.getBlockState(new BlockPos(x + 7, y + 1,  z + 4)).getBlock() == Blocks.brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 7, y - 1,  z + 4)).getBlock() == Blocks.brick_stairs) {
+
+                        BlockPos pos1 = new BlockPos(x - 5, y - 1, z - 1);
+                        blockTextMap.put(pos1,"Tiny Hut 1");
+                    }
+
+                    //Dragon Skull
+                    if (world.getBlockState(pos).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x, y + 1,  z)).getBlock() == Blocks.carpet &&
+                            world.getBlockState(new BlockPos(x - 5, y + 1,  z)).getBlock() == Blocks.quartz_stairs &&
+                            world.getBlockState(new BlockPos(x - 6, y + 1,  z)).getBlock() == Blocks.quartz_block &&
+                            world.getBlockState(new BlockPos(x - 6, y + 2,  z)).getBlock() == Blocks.stone_slab) {
+
+                        BlockPos pos1 = new BlockPos(x - 4, y + 1,  z);
+                        BlockPos pos2 = new BlockPos(x - 19, y - 6,  z - 5);
+
+                        blockTextMap.put(pos1,"Dragon Skull 1");
+                        blockTextMap.put(pos2,"Dragon Skull 2");
+                    }
+
+                    //Precursor Trapped Stair
+
+                    if (world.getBlockState(pos).getBlock() == Blocks.spruce_fence &&
+                            world.getBlockState(new BlockPos(x, y + 1,  z)).getBlock() == Blocks.torch &&
+                            world.getBlockState(new BlockPos(x + 1, y,  z + 9)).getBlock() == Blocks.dispenser &&
+                            world.getBlockState(new BlockPos(x + 1, y + 2,z + 9)).getBlock() == Blocks.dispenser &&
+                            world.getBlockState(new BlockPos(x, y + 1, z+9)).getBlock() == Blocks.dispenser) {
+
+                        BlockPos pos1 = new BlockPos(x + 1, y + 1,  z - 3);
+                        BlockPos pos2 = new BlockPos(x - 48, y + 34,  z - 7);
+                        BlockPos pos3 = new BlockPos(x - 37, y + 52,  z + 33);
+
+                        blockTextMap.put(pos1,"Precursor Trapped Stair 1");
+                        blockTextMap.put(pos2,"Precursor Trapped Stair 2");
+                        blockTextMap.put(pos3,"Precursor Trapped Stair 3");
+                    }
+
+
+                    //Precursor Diorite Corridor
+                    if (world.getBlockState(pos).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x, y,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x, y,  z - 1)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x, y - 1,  z + 1)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z - 1)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + 2, y - 1,  z - 2)).getBlock() == Blocks.planks) {
+
+                        BlockPos pos1 = new BlockPos(x + 5, y,  z + 1);
+
+                        blockTextMap.put(pos1,"Precursor Diorite Corridor 1");
+                    }
+
+                    //Underground Office
+                    if (world.getBlockState(pos).getBlock() == Blocks.lever &&
+                            world.getBlockState(new BlockPos(x, y,  z - 3)).getBlock() == Blocks.lever &&
+                            world.getBlockState(new BlockPos(x , y - 1,  z)).getBlock() == Blocks.spruce_stairs &&
+                            world.getBlockState(new BlockPos(x , y - 1,  z - 1)).getBlock() == Blocks.log2 &&
+                            world.getBlockState(new BlockPos(x - 1, y - 1,  z - 1)).getBlock() == Blocks.tripwire_hook &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z - 1)).getBlock() == Blocks.tripwire_hook &&
+                            world.getBlockState(new BlockPos(x , y - 1,  z - 2)).getBlock() == Blocks.log2 &&
+                            world.getBlockState(new BlockPos(x - 1, y - 1,  z - 2)).getBlock() == Blocks.tripwire_hook &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z - 2)).getBlock() == Blocks.tripwire_hook &&
+                            world.getBlockState(new BlockPos(x , y - 1,  z - 3)).getBlock() == Blocks.spruce_stairs) {
+
+                        BlockPos pos1 = new BlockPos(x, y - 1,  z + 2);
+                        BlockPos pos2 = new BlockPos(x - 15, y,  z + 5);
+                        blockTextMap.put(pos1,"Underground Office 1");
+                        blockTextMap.put(pos2,"Underground Office 2");
+
+                    }
+
+                    //Precursor Throne Hall
+
+                    if (world.getBlockState(pos).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x+2, y, z)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x, y, z + 1)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x+2 , y,  z + 1)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x+2 , y,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x+2 , y + 1,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x+1 , y,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x+1 , y + 1,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x+1 , y + 2,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x+1 , y + 3,  z + 2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x , y,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x , y + 1,  z + 2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x, y - 1,  z)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 2, y - 1,  z)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x, y - 1,  z + 1)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y - 1,  z + 1)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + 2, y - 1,  z + 1)).getBlock() == Blocks.stone_stairs) {
+
+                        BlockPos pos1 = new BlockPos(x - 25, y - 32,  z - 30);
+                        BlockPos pos2 = new BlockPos(x + 4, y - 3,  z - 43);
+                        blockTextMap.put(pos1,"Precursor Throne Hall 1");
+                        blockTextMap.put(pos2,"Precursor Throne Hall 2");
+
+                    }
+
+
 
                     //Corleone Hideout
 //                           if (world.getBlockState(pos).getBlock() == Blocks.stonebrick) {

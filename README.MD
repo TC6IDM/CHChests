@@ -150,6 +150,9 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Puddle (1)
     - [ ] Bridge (1)
     
+
+Extra features
+* finding titanium in dwarven mines
 <!-- LICENSE -->
 ## License
 
