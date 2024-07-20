@@ -152,8 +152,9 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Bridge (1)
     
 
-Extra features
+Extra features to be added
 * finding titanium in dwarven mines
+* removoing chests after you click on them
 <!-- LICENSE -->
 ## License
 

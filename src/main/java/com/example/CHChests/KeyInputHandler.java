@@ -201,7 +201,7 @@ public class KeyInputHandler {
                     }
 
 
-                    //Precursor Diorite Corridor
+                    //Precursor Diorite Corridor (FIX THIS)
                     if (world.getBlockState(pos).getBlock() == Blocks.wooden_slab &&
                             world.getBlockState(new BlockPos(x, y,  z + 2)).getBlock() == Blocks.double_stone_slab &&
                             world.getBlockState(new BlockPos(x, y,  z - 1)).getBlock() == Blocks.wooden_slab &&
@@ -380,13 +380,42 @@ public class KeyInputHandler {
                         blockTextMap.put(pos2, "Precursor Tower 2");
                     }
 
-                    //NOTGIVEN 361 72 359
+                    //NEW AUTOMATED SCRIPT INGAME
+
+                    //Square 648 116 675
                     if (world.getBlockState(pos).getBlock() == Blocks.stone_stairs &&
-                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 0)).getBlock() == Blocks.cobblestone &&
-                            world.getBlockState(new BlockPos(x + 0, y + -1, z + -1)).getBlock() == Blocks.stone_slab) {
-                        BlockPos pos1 = new BlockPos(x + -1, y + -1, z + 0);
-                        blockTextMap.put(pos1, "NOTGIVEN 1");
+                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 1)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 4, z + 3)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 5, z + 1)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 5, z + 0)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 5, z + -1)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 5, z + -1)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 5, z + 0)).getBlock() == Blocks.stone_brick_stairs) {
+                        BlockPos pos1 = new BlockPos(x + 1, y + 5, z + 1);
+                        blockTextMap.put(pos1, "Square 1");
                     }
+                    /*
+                    /setblock 648 116 675 minecraft:stone_stairs
+                    /setblock 648 115 676 minecraft:stone_stairs
+                    /setblock 648 115 677 minecraft:stone_slab
+                    /setblock 648 120 678 minecraft:stone_brick_stairs
+                    /setblock 648 121 676 minecraft:stone_brick_stairs
+                    /setblock 648 121 675 minecraft:stone_brick_stairs
+                    /setblock 648 121 674 minecraft:stone_brick_stairs
+                    /setblock 649 121 674 minecraft:stone_brick_stairs
+                    /setblock 649 121 675 minecraft:stone_brick_stairs
+                    /setblock 649 121 676 minecraft:chest
+                    */
+
+
+//                    //NOTGIVEN 361 72 359
+//                    if (world.getBlockState(pos).getBlock() == Blocks.stone_stairs &&
+//                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 0)).getBlock() == Blocks.cobblestone &&
+//                            world.getBlockState(new BlockPos(x + 0, y + -1, z + -1)).getBlock() == Blocks.stone_slab) {
+//                        BlockPos pos1 = new BlockPos(x + -1, y + -1, z + 0);
+//                        blockTextMap.put(pos1, "NOTGIVEN 1");
+//                    }
                 }
             }
         }
@@ -423,7 +452,10 @@ public class KeyInputHandler {
         BlockPos pos = getBlockLookingAt(player,5.0);
         if (pos == null) return;
         String block = getBlockRegistryName(world.getBlockState(pos).getBlock());
-        System.out.println("Coords: "+ pos.getX() + " " + pos.getY() + " " + pos.getZ() + " Name: " + block);
+        String message = "[CHChests]: Coords: " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " Name: " + block;
+        System.out.println(message);
+        ChatComponentText chatMessage = new ChatComponentText(message);
+        player.addChatMessage(chatMessage);
         structureBlocks.add(new BlockInfo(pos, block));
     }
 
@@ -431,7 +463,10 @@ public class KeyInputHandler {
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
         BlockPos pos = getBlockLookingAt(player,5.0);
         if (pos == null) return;
-        System.out.println("Coords: "+ pos.getX() + " " + pos.getY() + " " + pos.getZ() + " CHEST!");
+        String message = "[CHChests]: Coords: " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " CHEST!";
+        System.out.println(message);
+        ChatComponentText chatMessage = new ChatComponentText(message);
+        player.addChatMessage(chatMessage);
         structureChests.add(pos);
     }
 
@@ -440,7 +475,12 @@ public class KeyInputHandler {
             System.out.println("No blocks added to the structure.");
             return;
         }
-        System.out.println("starting");
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        String message = "[CHChests]: Creating Structure";
+        System.out.println(message);
+        ChatComponentText chatMessage = new ChatComponentText(message);
+        player.addChatMessage(chatMessage);
+
         String structName = "NOTGIVEN";
 
         BlockPos start = structureBlocks.get(0).pos; // Get the first block position
@@ -452,7 +492,7 @@ public class KeyInputHandler {
         fullText.append("//").append(structName).append(" ").append(firstBlock.pos.getX()).append(" ").append(firstBlock.pos.getY()).append(" ").append(firstBlock.pos.getZ()).append("\n")
                 .append("if (world.getBlockState(pos).getBlock() == ").append(firstBlock.blockName).append(" &&\n");
 
-        debugText.append("/setblock ").append(firstBlock.pos.getX()).append(" ").append(firstBlock.pos.getY()).append(" ").append(firstBlock.pos.getZ()).append(" minecraft:").append(firstBlock.blockName.replace("Blocks.", "")).append("\n");
+        debugText.append("/*\n/setblock ").append(firstBlock.pos.getX()).append(" ").append(firstBlock.pos.getY()).append(" ").append(firstBlock.pos.getZ()).append(" minecraft:").append(firstBlock.blockName.replace("Blocks.", "")).append("\n");
 
         // Process remaining blocks
         for (int i = 1; i < structureBlocks.size(); i++) {
@@ -477,7 +517,7 @@ public class KeyInputHandler {
         }
 
         fullText.append("}");
-
+        debugText.append("*/");
         // Print the generated code
         System.out.println(fullText.toString());
         System.out.println("\n\n\n\n");
@@ -486,7 +526,7 @@ public class KeyInputHandler {
         // Write the generated code to a file
         FileWriter writer = new FileWriter("C:\\Users\\Owner\\Desktop\\Forge Mod\\Struct.txt");
         writer.write(fullText.toString());
-        writer.write("\n\n\n\n");
+        writer.write("\n\n");
         writer.write(debugText.toString());
         writer.close();
         structureChests.clear();
