@@ -105,7 +105,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Precursor Stone Bridge (1)
     - [ ] Precursor Diorite Pillars (1)
     - [ ] Precursor Square Hall (1)
-    - [X] Precursor Diorite Corridor (1) (v)
+    - [X] Precursor Diorite Corridor (1) (fix)
     - [ ] Precursor Trapped Pillars (1)
     - [X] Precursor Trapped Dungeon (1) (v)
     - [ ] Precursor Pitfall Corridor (1)
