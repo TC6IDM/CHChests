@@ -52,7 +52,6 @@ public class KeyInputHandler {
     public void onKeyInput(InputEvent.KeyInputEvent event) throws IOException {
         if (KeyBindings.clearChests.isPressed()) {blockTextMap.clear(); processedPositions.clear();}
         if (KeyBindings.addBlock.isPressed()) addBlock();
-        if (KeyBindings.addChest.isPressed()) addChest();
         if (KeyBindings.done.isPressed()) done();
         if(!KeyBindings.findChests.isPressed()) return;
 
@@ -416,6 +415,366 @@ public class KeyInputHandler {
 //                        BlockPos pos1 = new BlockPos(x + -1, y + -1, z + 0);
 //                        blockTextMap.put(pos1, "NOTGIVEN 1");
 //                    }
+
+                    //precursor Colosseum (NOT ON WIKI) 562 122 683
+                    if (world.getBlockState(pos).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -6, y + 0, z + 0)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + 0, y + -3, z + 0)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -6, y + -3, z + 0)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -16, y + 0, z + -10)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -16, y + 0, z + -16)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -16, y + -3, z + -10)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -16, y + -3, z + -16)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + -4, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -3, y + -4, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -4, y + -4, z + -2)).getBlock() == Blocks.stone_brick_stairs) {
+                        BlockPos pos1 = new BlockPos(x + -19, y + -3, z + -13);
+                        blockTextMap.put(pos1, "PRECURSOR COLISEUM 1");
+                        BlockPos pos2 = new BlockPos(x + -3, y + -3, z + 3);
+                        blockTextMap.put(pos2, "PRECURSOR COLISEUM 2");
+                    }
+/*
+/setblock 562 122 683 minecraft:hopper
+/setblock 556 122 683 minecraft:hopper
+/setblock 562 119 683 minecraft:stone_brick_stairs
+/setblock 556 119 683 minecraft:stone_brick_stairs
+/setblock 546 122 673 minecraft:hopper
+/setblock 546 122 667 minecraft:hopper
+/setblock 546 119 673 minecraft:stone_brick_stairs
+/setblock 546 119 667 minecraft:stone_brick_stairs
+/setblock 562 118 681 minecraft:stone_brick_stairs
+/setblock 559 118 681 minecraft:stone_brick_stairs
+/setblock 558 118 681 minecraft:stone_brick_stairs
+/setblock 543 119 670 minecraft:chest
+/setblock 559 119 686 minecraft:chest
+*/
+
+                    //Precursor Pitfall Corridor 595 155 606
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -1, y + -1, z + 0)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -2, y + 2, z + -21)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -2, y + 3, z + -21)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -1, y + 1, z + -21)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 2, z + -21)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 0, y + 3, z + -21)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 7, y + -3, z + -10)).getBlock() == Blocks.dispenser &&
+                            world.getBlockState(new BlockPos(x + 9, y + -3, z + -22)).getBlock() == Blocks.dispenser) {
+                        BlockPos pos1 = new BlockPos(x + 8, y + -1, z + -5);
+                        blockTextMap.put(pos1, "Precursor Pitfall Corridor 1");
+                    }
+
+/*
+/setblock 595 155 606 minecraft:sea_lantern
+/setblock 594 154 606 minecraft:sea_lantern
+/setblock 593 157 585 minecraft:cobblestone_wall
+/setblock 593 158 585 minecraft:cobblestone_wall
+/setblock 594 156 585 minecraft:stone_brick_stairs
+/setblock 595 157 585 minecraft:cobblestone_wall
+/setblock 595 158 585 minecraft:cobblestone_wall
+/setblock 602 152 596 minecraft:dispenser
+/setblock 604 152 584 minecraft:dispenser
+/setblock 603 154 601 minecraft:chest
+*/
+
+                    //Abandoned Lift 750 172 766
+                    if (world.getBlockState(pos).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.double_wooden_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 2)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + -1, y + -4, z + 2)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + -1, y + -4, z + 1)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + -1, y + -4, z + 0)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + -2, y + -4, z + 2)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + -2, y + -4, z + 1)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + -2, y + -4, z + 0)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + 2, y + 6, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 6, z + -1)).getBlock() == Blocks.stone &&
+                            world.getBlockState(new BlockPos(x + 2, y + 6, z + 0)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 8, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 8, z + -1)).getBlock() == Blocks.stone &&
+                            world.getBlockState(new BlockPos(x + 2, y + 8, z + 0)).getBlock() == Blocks.stone_brick_stairs) {
+                        BlockPos pos1 = new BlockPos(x + -1, y + -30, z + -11);
+                        blockTextMap.put(pos1, "Abandoned Lift 1");
+                    }
+
+/*
+/setblock 750 172 766 minecraft:wooden_slab
+/setblock 750 172 767 minecraft:double_wooden_slab
+/setblock 750 172 768 minecraft:wooden_slab
+/setblock 749 168 768 minecraft:wooden_slab
+/setblock 749 168 767 minecraft:wooden_slab
+/setblock 749 168 766 minecraft:wooden_slab
+/setblock 748 168 768 minecraft:log
+/setblock 748 168 767 minecraft:log
+/setblock 748 168 766 minecraft:log
+/setblock 752 178 764 minecraft:stone_brick_stairs
+/setblock 752 178 765 minecraft:stone
+/setblock 752 178 766 minecraft:stone_brick_stairs
+/setblock 752 180 764 minecraft:stone_brick_stairs
+/setblock 752 180 765 minecraft:stone
+/setblock 752 180 766 minecraft:stone_brick_stairs
+/setblock 749 142 755 minecraft:chest
+*/
+
+
+                    //Spider's Den 561 99 662
+                    if (world.getBlockState(pos).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 0)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + -2, y + -1, z + -1)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + -3, y + -1, z + -1)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + -2, y + -2, z + 0)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + -1, y + -2, z + 0)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 5, y + -2, z + -8)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 5, y + -2, z + -9)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 6, y + -2, z + -8)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 6, y + 0, z + -8)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 5, y + 0, z + -8)).getBlock() == Blocks.end_stone &&
+                            world.getBlockState(new BlockPos(x + 5, y + 0, z + -9)).getBlock() == Blocks.end_stone) {
+                        BlockPos pos1 = new BlockPos(x + 1, y + -3, z + -5);
+                        blockTextMap.put(pos1, "Spider's Den 1");
+                        BlockPos pos2 = new BlockPos(x + -20, y + -24, z + -14);
+                        blockTextMap.put(pos2, "Spider's Den 2");
+                    }
+
+/*
+/setblock 561 99 662 minecraft:end_stone
+/setblock 560 99 662 minecraft:end_stone
+/setblock 559 98 661 minecraft:end_stone
+/setblock 558 98 661 minecraft:end_stone
+/setblock 559 97 662 minecraft:end_stone
+/setblock 560 97 662 minecraft:end_stone
+/setblock 566 97 654 minecraft:end_stone
+/setblock 566 97 653 minecraft:end_stone
+/setblock 567 97 654 minecraft:end_stone
+/setblock 567 99 654 minecraft:end_stone
+/setblock 566 99 654 minecraft:end_stone
+/setblock 566 99 653 minecraft:end_stone
+/setblock 562 96 657 minecraft:chest
+/setblock 541 75 648 minecraft:chest
+*/
+
+                    //Magma Spiral Cavern 456 50 769
+                    if (world.getBlockState(pos).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 2)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + -10, y + 0, z + 3)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + -3)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 5, y + 0, z + 2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 5, y + 0, z + 1)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 4, y + 0, z + 3)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + 5)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 4, y + 1, z + 5)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -17, y + -1, z + 2)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + -18, y + 0, z + 3)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -19, y + 0, z + 2)).getBlock() == Blocks.stone_stairs) {
+                        BlockPos pos1 = new BlockPos(x + 0, y + 1, z + 1);
+                        blockTextMap.put(pos1, "Magma Spiral Cavern 1");
+                        BlockPos pos2 = new BlockPos(x + -25, y + 29, z + 4);
+                        blockTextMap.put(pos2, "Magma Spiral Cavern 2");
+                    }
+
+/*
+/setblock 456 50 769 minecraft:stone_slab
+/setblock 456 50 771 minecraft:stone_stairs
+/setblock 446 50 772 minecraft:stone_slab
+/setblock 459 50 766 minecraft:stone_slab
+/setblock 461 50 771 minecraft:stone_slab
+/setblock 461 50 770 minecraft:stone_slab
+/setblock 460 50 772 minecraft:stone_slab
+/setblock 459 50 774 minecraft:stone_slab
+/setblock 460 51 774 minecraft:stone_slab
+/setblock 439 49 771 minecraft:stone_stairs
+/setblock 438 50 772 minecraft:stone_slab
+/setblock 437 50 771 minecraft:stone_stairs
+/setblock 456 51 770 minecraft:chest
+/setblock 431 79 773 minecraft:chest
+*/
+
+                    //Caravan 688 141 341
+                    if (world.getBlockState(pos).getBlock() == Blocks.birch_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.birch_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + 1)).getBlock() == Blocks.birch_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + 0)).getBlock() == Blocks.birch_stairs &&
+                            world.getBlockState(new BlockPos(x + 7, y + 7, z + -3)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 7, y + 8, z + -3)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 6, y + 2, z + -4)).getBlock() == Blocks.oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 6, y + 2, z + -3)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + 6, y + 2, z + -2)).getBlock() == Blocks.oak_stairs) {
+                        BlockPos pos1 = new BlockPos(x + 6, y + 2, z + -5);
+                        blockTextMap.put(pos1, "Caravan 1");
+                    }
+
+/*
+/setblock 688 141 341 minecraft:birch_stairs
+/setblock 688 141 342 minecraft:birch_stairs
+/setblock 689 141 342 minecraft:birch_stairs
+/setblock 689 141 341 minecraft:birch_stairs
+/setblock 695 148 338 minecraft:cobblestone_wall
+/setblock 695 149 338 minecraft:stone_slab
+/setblock 694 143 337 minecraft:oak_stairs
+/setblock 694 143 338 minecraft:wooden_slab
+/setblock 694 143 339 minecraft:oak_stairs
+/setblock 694 143 336 minecraft:chest
+*/
+
+
+                    //Treasure Deposits 668 142 393
+                    if (world.getBlockState(pos).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -8, y + 0, z + 0)).getBlock() == Blocks.hopper &&
+                            world.getBlockState(new BlockPos(x + -5, y + -3, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -5, y + -3, z + -3)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -3, y + -3, z + -3)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -3, y + -3, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -4, y + -4, z + -3)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + -4, y + -4, z + -2)).getBlock() == Blocks.double_stone_slab &&
+                            world.getBlockState(new BlockPos(x + -7, y + -6, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -6, y + -7, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -5, y + -7, z + -2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -4, y + -7, z + -2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -3, y + -7, z + -2)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -2, y + -7, z + -2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + -6, z + -2)).getBlock() == Blocks.stone_brick_stairs) {
+                        BlockPos pos1 = new BlockPos(x + -7, y + -9, z + 13);
+                        blockTextMap.put(pos1, "Treasure Deposits 1");
+                        BlockPos pos2 = new BlockPos(x + -3, y + -9, z + 4);
+                        blockTextMap.put(pos2, "Treasure Deposits 2");
+                    }
+
+/*
+/setblock 668 142 393 minecraft:hopper
+/setblock 660 142 393 minecraft:hopper
+/setblock 663 139 391 minecraft:stone_brick_stairs
+/setblock 663 139 390 minecraft:stone_brick_stairs
+/setblock 665 139 390 minecraft:stone_brick_stairs
+/setblock 665 139 391 minecraft:stone_brick_stairs
+/setblock 664 138 390 minecraft:double_stone_slab
+/setblock 664 138 391 minecraft:double_stone_slab
+/setblock 661 136 391 minecraft:stone_brick_stairs
+/setblock 662 135 391 minecraft:stone_brick_stairs
+/setblock 663 135 391 minecraft:stone_slab
+/setblock 664 135 391 minecraft:stone_slab
+/setblock 665 135 391 minecraft:stone_slab
+/setblock 666 135 391 minecraft:stone_brick_stairs
+/setblock 667 136 391 minecraft:stone_brick_stairs
+/setblock 661 133 406 minecraft:chest
+/setblock 665 133 397 minecraft:chest
+*/
+
+
+                    //Sludge Cavern 520 76 352
+                    if (world.getBlockState(pos).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x + -7, y + 2, z + -8)).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x + -3, y + 9, z + -4)).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x + 0, y + 7, z + -11)).getBlock() == Blocks.glowstone) {
+                        BlockPos pos1 = new BlockPos(x + 1, y + -4, z + -8);
+                        blockTextMap.put(pos1, "Sludge Cavern 1");
+                        BlockPos pos2 = new BlockPos(x + -20, y + 14, z + -17);
+                        blockTextMap.put(pos2, "Sludge Cavern 2");
+                    }
+
+/*
+/setblock 520 76 352 minecraft:glowstone
+/setblock 513 78 344 minecraft:glowstone
+/setblock 517 85 348 minecraft:glowstone
+/setblock 520 83 341 minecraft:glowstone
+/setblock 521 72 344 minecraft:chest
+/setblock 500 90 335 minecraft:chest
+*/
+
+
+                    //Jungle Lagoon Spiral 395 131 474
+                    if (world.getBlockState(pos).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x + -17, y + -10, z + -4)).getBlock() == Blocks.glowstone &&
+                            world.getBlockState(new BlockPos(x + 2, y + -32, z + 5)).getBlock() == Blocks.glowstone) {
+                        BlockPos pos1 = new BlockPos(x + 0, y + 1, z + 0);
+                        blockTextMap.put(pos1, "Jungle Lagoon Spiral 1");
+                        BlockPos pos2 = new BlockPos(x + -17, y + -9, z + -4);
+                        blockTextMap.put(pos2, "Jungle Lagoon Spiral 2");
+                        BlockPos pos3 = new BlockPos(x + 2, y + -31, z + 5);
+                        blockTextMap.put(pos3, "Jungle Lagoon Spiral 3");
+                    }
+
+/*
+/setblock 395 131 474 minecraft:glowstone
+/setblock 378 121 470 minecraft:glowstone
+/setblock 397 99 479 minecraft:glowstone
+/setblock 395 132 474 minecraft:chest
+/setblock 378 122 470 minecraft:chest
+/setblock 397 100 479 minecraft:chest
+*/
+
+                    //Aqueduct 296 74 501
+                    if (world.getBlockState(pos).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 1)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 0)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 8)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 8)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 7)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 7)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + -9, y + 4, z + 8)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -9, y + 5, z + 8)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -9, y + 2, z + 2)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -9, y + 3, z + 2)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -9, y + 4, z + 2)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + -9, y + 6, z + 5)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -9, y + 6, z + 6)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -9, y + 6, z + 7)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -9, y + 6, z + 4)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + -9, y + 6, z + 3)).getBlock() == Blocks.stone_slab) {
+                        BlockPos pos1 = new BlockPos(x + 0, y + 0, z + 4);
+                        blockTextMap.put(pos1, "Aqueduct 1");
+                    }
+
+/*
+/setblock 296 74 501 minecraft:stone_brick_stairs
+/setblock 296 74 502 minecraft:stone_brick_stairs
+/setblock 295 74 502 minecraft:stone_brick_stairs
+/setblock 295 74 501 minecraft:stone_brick_stairs
+/setblock 296 74 509 minecraft:stone_brick_stairs
+/setblock 295 74 509 minecraft:stone_brick_stairs
+/setblock 296 74 508 minecraft:stone_brick_stairs
+/setblock 295 74 508 minecraft:stone_brick_stairs
+/setblock 287 78 509 minecraft:cobblestone_wall
+/setblock 287 79 509 minecraft:cobblestone_wall
+/setblock 287 76 503 minecraft:cobblestone_wall
+/setblock 287 77 503 minecraft:cobblestone_wall
+/setblock 287 78 503 minecraft:cobblestone_wall
+/setblock 287 80 506 minecraft:stone_slab
+/setblock 287 80 507 minecraft:stone_slab
+/setblock 287 80 508 minecraft:stone_slab
+/setblock 287 80 505 minecraft:stone_slab
+/setblock 287 80 504 minecraft:stone_slab
+/setblock 296 74 505 minecraft:chest
+*/
+
+                    //Magma Lavafalls 240 62 398
+                    if (world.getBlockState(pos).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -1)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + -1, z + 0)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 2, y + -1, z + -1)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 3, y + -1, z + -1)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -3)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + -4)).getBlock() == Blocks.stone_stairs &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + -4)).getBlock() == Blocks.stone_slab &&
+                            world.getBlockState(new BlockPos(x + 4, y + 0, z + -3)).getBlock() == Blocks.stone_slab) {
+                        BlockPos pos1 = new BlockPos(x + 2, y + 0, z + -4);
+                        blockTextMap.put(pos1, "Magma Lavafalls 1");
+                        BlockPos pos2 = new BlockPos(x + 22, y + 3, z + -3);
+                        blockTextMap.put(pos2, "Magma Lavafalls 2");
+                    }
+
+/*
+/setblock 240 62 398 minecraft:stone_stairs
+/setblock 240 62 397 minecraft:stone_stairs
+/setblock 241 61 398 minecraft:stone_slab
+/setblock 242 61 397 minecraft:stone_slab
+/setblock 243 61 397 minecraft:stone_slab
+/setblock 240 62 395 minecraft:stone_stairs
+/setblock 241 62 394 minecraft:stone_stairs
+/setblock 243 62 394 minecraft:stone_slab
+/setblock 244 62 395 minecraft:stone_slab
+/setblock 242 62 394 minecraft:chest
+/setblock 262 65 395 minecraft:chest
+*/
                 }
             }
         }
@@ -456,18 +815,11 @@ public class KeyInputHandler {
         System.out.println(message);
         ChatComponentText chatMessage = new ChatComponentText(message);
         player.addChatMessage(chatMessage);
-        structureBlocks.add(new BlockInfo(pos, block));
-    }
-
-    public void addChest(){
-        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-        BlockPos pos = getBlockLookingAt(player,5.0);
-        if (pos == null) return;
-        String message = "[CHChests]: Coords: " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " CHEST!";
-        System.out.println(message);
-        ChatComponentText chatMessage = new ChatComponentText(message);
-        player.addChatMessage(chatMessage);
-        structureChests.add(pos);
+        if (block.equals("Blocks.chest")) {
+            structureChests.add(pos);
+        } else {
+            structureBlocks.add(new BlockInfo(pos, block));
+        }
     }
 
     public void done() throws IOException {

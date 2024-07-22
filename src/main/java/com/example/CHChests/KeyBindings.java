@@ -8,7 +8,6 @@ public class KeyBindings {
     public static KeyBinding findChests;
     public static KeyBinding clearChests;
     public static KeyBinding addBlock;
-    public static KeyBinding addChest;
     public static KeyBinding done;
 
 
@@ -21,9 +20,6 @@ public class KeyBindings {
 
         addBlock = new KeyBinding("key.addBlock", Keyboard.KEY_DIVIDE, "key.categories.CHChests");
         ClientRegistry.registerKeyBinding(addBlock);
-
-        addChest = new KeyBinding("key.addChest", Keyboard.KEY_MULTIPLY, "key.categories.CHChests");
-        ClientRegistry.registerKeyBinding(addChest);
 
         done = new KeyBinding("key.debug", Keyboard.KEY_SUBTRACT, "key.categories.CHChests");
         ClientRegistry.registerKeyBinding(done);

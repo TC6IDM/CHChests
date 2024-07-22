@@ -1,14 +1,14 @@
-//NOTGIVEN 361 71 359
-if (world.getBlockState(pos).getBlock() == Blocks.cobblestone &&
-world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.stone_stairs &&
-world.getBlockState(new BlockPos(x + 0, y + 0, z + -1)).getBlock() == Blocks.stone_slab) {
-BlockPos pos1 = new BlockPos(x + -1, y + 0, z + 0);
+//NOTGIVEN 361 71 358
+if (world.getBlockState(pos).getBlock() == Blocks.stone_slab &&
+world.getBlockState(new BlockPos(x + 0, y + 1, z + 1)).getBlock() == Blocks.stone_stairs &&
+world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.cobblestone) {
+BlockPos pos1 = new BlockPos(x + -1, y + 0, z + 1);
 blockTextMap.put(pos1, "NOTGIVEN 1");
 }
 
 /*
-/setblock 361 71 359 minecraft:cobblestone
-/setblock 361 72 359 minecraft:stone_stairs
 /setblock 361 71 358 minecraft:stone_slab
+/setblock 361 72 359 minecraft:stone_stairs
+/setblock 361 71 359 minecraft:cobblestone
 /setblock 360 71 359 minecraft:chest
 */
