@@ -850,6 +850,11 @@ public class KeyInputHandler {
                     if (world.getBlockState(pos).getBlock() == Blocks.stone){
                         int metadata = world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos));
                         if (metadata == 4) {
+                            if (isInRange(pos, new BlockPos(150, 186, -29), new BlockPos(108, 182, 112)) //walkway to king
+                                    || isInRange(pos, new BlockPos(-21, 146, -35), new BlockPos(21, 150, -110)) //forge
+                                    || isInRange(pos, new BlockPos(-18, 176, -62), new BlockPos(17, 176, -48))) //staircase
+                            {continue;}
+
                             titaniumList.add(pos);
                             // It's a Smooth Diorite block
                         }
@@ -863,7 +868,11 @@ public class KeyInputHandler {
         player.addChatMessage(chatMessage);
 
     }
-
+    private boolean isInRange(BlockPos pos, BlockPos min, BlockPos max) {
+        return pos.getX() >= min.getX() && pos.getX() <= max.getX()
+                && pos.getY() >= min.getY() && pos.getY() <= max.getY()
+                && pos.getZ() >= min.getZ() && pos.getZ() <= max.getZ();
+    }
 
     //    @SubscribeEvent
 //    public void onRenderTick(TickEvent.RenderTickEvent event){

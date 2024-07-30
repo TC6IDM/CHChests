@@ -5,28 +5,31 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.List;
 import java.util.Map;
 
-public class ChestClickHandler {
+public class ClickHandler {
     private final KeyInputHandler keyInputHandler;
 
-    public ChestClickHandler(KeyInputHandler keyInputHandler) {
+    public ClickHandler(KeyInputHandler keyInputHandler) {
         this.keyInputHandler = keyInputHandler;
     }
 
     @SubscribeEvent
     public void onPlayerInteract(PlayerInteractEvent event) {
-        // Check if the event is a right-click block event
-        if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-            // Get the position of the clicked block
-            BlockPos clickedPos = event.pos;
 
-            // Check if the clicked block is a chest
-            if (event.world.getBlockState(clickedPos).getBlock() instanceof BlockChest) {
-                // Remove the block from the blockTextMap
-                Map<BlockPos, String> blockTextMap = keyInputHandler.getBlockTextMap();
-                blockTextMap.remove(clickedPos);
-            }
+        //remove chest when right clicked
+        if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+            BlockPos clickedPos = event.pos;
+            Map<BlockPos, String> blockTextMap = keyInputHandler.getBlockTextMap();
+            blockTextMap.remove(clickedPos);
+        }
+
+        //remove titanium when left clicked
+        if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
+            BlockPos clickedPos = event.pos;
+            List<BlockPos> titaniumList = keyInputHandler.getTitaniumList();
+            titaniumList.remove(clickedPos);
         }
     }
 }
