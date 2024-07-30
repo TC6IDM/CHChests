@@ -15,7 +15,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Trapped Throne (1)
     - [X] Dragon Skull (2)
     - [ ] Tavern (0)
-    - [X] Caravan (1) (v)
+    - [X] Caravan (1)
     - [X] Tiny Hut (1) (v)
     - [ ] Dark Auction Room (0)
     - [ ] Underground Spring (1)
@@ -24,7 +24,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [X] Colosseum (1)
     - [X] Spider's Den (2) (v)
     - [X] Abandoned Lift (1) (v)
-    - [X] Ruins (2) (v)
+    - [X] Ruins (2)
     - [ ] Ruby Minetrack (1)
     - [ ] Ruby Bridge (1)
     - [ ] Red Puzzle Tower (0)
@@ -74,9 +74,9 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 - [ ] Goblin Holdout
     - [ ] The 3 Bears Fireplace (0)
     - [X] Goblin King Tower (2)
-    - [X] Deep Goblin Lair (3) (v)
+    - [X] Deep Goblin Lair (3)
     - [ ] Goblin Gold Stash (2)
-    - [X] Goblin Sewer Camp (1) (v)
+    - [X] Goblin Sewer Camp (1)
     - [ ] Goblin Wide Pit (1)
     - [ ] Goblin Lava Spiral Ramp (1)
     - [ ] Giant Campfire (1)
@@ -91,7 +91,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [X] Goblin Queen's Den (2)
 
 - [ ] Precursor Remnants
-    - [X] Big Automaton (2) (v)
+    - [X] Big Automaton (2)
     - [ ] Precursor Lava Orb (2)
     - [ ] Wooden Door Passage (1)
     - [X] Precursor Tower (2) (v) (missing one chest?)
@@ -154,8 +154,6 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     
 
 Extra features to be added
-* finding titanium in dwarven mines
-* removoing chests after you click on them
 <!-- LICENSE -->
 ## License
 

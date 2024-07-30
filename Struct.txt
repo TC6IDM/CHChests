@@ -1,14 +1,16 @@
-//NOTGIVEN 361 71 358
-if (world.getBlockState(pos).getBlock() == Blocks.stone_slab &&
-world.getBlockState(new BlockPos(x + 0, y + 1, z + 1)).getBlock() == Blocks.stone_stairs &&
-world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.cobblestone) {
-BlockPos pos1 = new BlockPos(x + -1, y + 0, z + 1);
-blockTextMap.put(pos1, "NOTGIVEN 1");
+//Underground Spring 569 117 436
+if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+world.getBlockState(new BlockPos(x + 5, y + 0, z + -2)).getBlock() == Blocks.sea_lantern &&
+world.getBlockState(new BlockPos(x + 14, y + 0, z + -4)).getBlock() == Blocks.sea_lantern &&
+world.getBlockState(new BlockPos(x + 9, y + 0, z + 3)).getBlock() == Blocks.sea_lantern) {
+BlockPos pos1 = new BlockPos(x + 6, y + 0, z + 2);
+blockTextMap.put(pos1, "Underground Spring 1");
 }
 
 /*
-/setblock 361 71 358 minecraft:stone_slab
-/setblock 361 72 359 minecraft:stone_stairs
-/setblock 361 71 359 minecraft:cobblestone
-/setblock 360 71 359 minecraft:chest
+/setblock 569 117 436 minecraft:sea_lantern
+/setblock 574 117 434 minecraft:sea_lantern
+/setblock 583 117 432 minecraft:sea_lantern
+/setblock 578 117 439 minecraft:sea_lantern
+/setblock 575 117 438 minecraft:chest
 */

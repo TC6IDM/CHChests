@@ -9,6 +9,7 @@ public class KeyBindings {
     public static KeyBinding clearChests;
     public static KeyBinding addBlock;
     public static KeyBinding done;
+    public static KeyBinding findTitanium;
 
 
     public static void init() {
@@ -23,5 +24,8 @@ public class KeyBindings {
 
         done = new KeyBinding("key.debug", Keyboard.KEY_SUBTRACT, "key.categories.CHChests");
         ClientRegistry.registerKeyBinding(done);
+
+        findTitanium = new KeyBinding("key.find_titanium", Keyboard.KEY_ADD, "key.categories.CHChests");
+        ClientRegistry.registerKeyBinding(findTitanium);
     }
 }

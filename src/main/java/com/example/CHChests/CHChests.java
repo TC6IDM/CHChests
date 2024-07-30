@@ -17,11 +17,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class CHChests
 {
     public static final String MODID = "CHChests";
-    public static final String VERSION = "1.7";
+    public static final String VERSION = "1.8";
+    private KeyInputHandler keyInputHandler;
+
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new com.example.CHChests.KeyInputHandler());
+        keyInputHandler = new KeyInputHandler();
+        MinecraftForge.EVENT_BUS.register(keyInputHandler);
+        MinecraftForge.EVENT_BUS.register(new ChestClickHandler(keyInputHandler));
+        MinecraftForge.EVENT_BUS.register(new BlockEventHandler(keyInputHandler));
+
         KeyBindings.init();
     }
 

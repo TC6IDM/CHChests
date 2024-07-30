@@ -45,14 +45,23 @@ public class KeyInputHandler {
     }
 
     private Map<BlockPos, String> blockTextMap = new HashMap<BlockPos, String>();
+    public Map<BlockPos, String> getBlockTextMap() {
+        return blockTextMap;
+    }
+
+    private List<BlockPos> titaniumList = new ArrayList<BlockPos>();
+    public List<BlockPos> getTitaniumList() {return titaniumList;}
+
+    private Map<String, Integer> blockCountMap = new HashMap<String, Integer>();
     private Set<BlockPos> processedPositions = new HashSet<BlockPos>();
     private List<BlockInfo> structureBlocks = new ArrayList<BlockInfo>();
     private List<BlockPos> structureChests = new ArrayList<BlockPos>();
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) throws IOException {
-        if (KeyBindings.clearChests.isPressed()) {blockTextMap.clear(); processedPositions.clear();}
+        if (KeyBindings.clearChests.isPressed()) {blockTextMap.clear(); titaniumList.clear(); processedPositions.clear();}
         if (KeyBindings.addBlock.isPressed()) addBlock();
         if (KeyBindings.done.isPressed()) done();
+        if (KeyBindings.findTitanium.isPressed()) findTitanium();
         if(!KeyBindings.findChests.isPressed()) return;
 
         System.out.println("LOOKING FOR CHESTS");
@@ -95,7 +104,13 @@ public class KeyInputHandler {
                         continue;
                     }
 
+                    String blockName = getBlockRegistryName(world.getBlockState(pos).getBlock());
                     processedPositions.add(pos);
+                    if (blockCountMap.containsKey(blockName)) {
+                        blockCountMap.put(blockName, blockCountMap.get(blockName) + 1);
+                    } else {
+                        blockCountMap.put(blockName, 1);
+                    }
 
                     //King structure
                     if (world.getBlockState(pos).getBlock() == Blocks.wool &&
@@ -775,13 +790,82 @@ public class KeyInputHandler {
 /setblock 242 62 394 minecraft:chest
 /setblock 262 65 395 minecraft:chest
 */
+
+
+                    //Underground Spring 569 117 436
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 5, y + 0, z + -2)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 14, y + 0, z + -4)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 9, y + 0, z + 3)).getBlock() == Blocks.sea_lantern) {
+                        BlockPos pos1 = new BlockPos(x + 6, y + 0, z + 2);
+                        blockTextMap.put(pos1, "Underground Spring 1");
+                    }
+
+/*
+/setblock 569 117 436 minecraft:sea_lantern
+/setblock 574 117 434 minecraft:sea_lantern
+/setblock 583 117 432 minecraft:sea_lantern
+/setblock 578 117 439 minecraft:sea_lantern
+/setblock 575 117 438 minecraft:chest
+*/
+
+                    
                 }
             }
         }
+        ChatComponentText chatMessage = new ChatComponentText("Blocks processed: " + processedPositions.size());
+        player.addChatMessage(chatMessage);
+
+        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<Map.Entry<String, Integer>>(blockCountMap.entrySet());
+
+        // Sort by block counts (values) in descending order
+        Collections.sort(sortedEntries, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                return entry1.getValue().compareTo(entry2.getValue()); // Descending order
+            }
+        });
+
+        for (Map.Entry<String, Integer> entry : sortedEntries) {
+            ChatComponentText chatMessage2 = new ChatComponentText(entry.getKey() + ": " + entry.getValue());
+            player.addChatMessage(chatMessage2);
+        }
+    }
+
+    private void findTitanium() {
+        System.out.println("LOOKING FOR TITANIUM");
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        World world = player.worldObj;
+        titaniumList.clear();
+        BlockPos playerPos = player.getPosition();
+        int searchRadius = 200;
+        BlockPos startPos = playerPos.add(-searchRadius, -searchRadius, -searchRadius);
+        BlockPos endPos = playerPos.add(searchRadius, searchRadius, searchRadius);
+
+        for (int x = startPos.getX(); x <= endPos.getX(); x++) {
+            for (int y = startPos.getY(); y <= endPos.getY(); y++) {
+                for (int z = startPos.getZ(); z <= endPos.getZ(); z++) {
+
+                    BlockPos pos = new BlockPos(x, y, z);
+                    if (world.getBlockState(pos).getBlock() == Blocks.stone){
+                        int metadata = world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos));
+                        if (metadata == 4) {
+                            titaniumList.add(pos);
+                            // It's a Smooth Diorite block
+                        }
+                    }
+
+                }
+            }
+        }
+
+        ChatComponentText chatMessage = new ChatComponentText("Titanium found: " + titaniumList.size());
+        player.addChatMessage(chatMessage);
+
     }
 
 
-//    @SubscribeEvent
+    //    @SubscribeEvent
 //    public void onRenderTick(TickEvent.RenderTickEvent event){
 //        Minecraft mc = Minecraft.getMinecraft();
 //        FontRenderer fRenderer = mc.fontRendererObj;
@@ -887,12 +971,31 @@ public class KeyInputHandler {
     }
     @SubscribeEvent
     public void onRenderWorldLast(RenderWorldLastEvent event) {
-        if (!blockTextMap.isEmpty()) {
-            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            double playerX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
-            double playerY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
-            double playerZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        double playerX = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks;
+        double playerY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
+        double playerZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
 
+        if (!titaniumList.isEmpty()) {
+            GL11.glPushMatrix();
+            GL11.glTranslated(-playerX, -playerY, -playerZ);
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glLineWidth(2.0F);
+
+            for (BlockPos pos : titaniumList) {
+                AxisAlignedBB box = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+                RenderGlobal.drawOutlinedBoundingBox(box, 255, 255, 255, 255);
+            }
+
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glPopMatrix();
+        }
+        if (!blockTextMap.isEmpty()) {
             GL11.glPushMatrix();
             GL11.glTranslated(-playerX, -playerY, -playerZ);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
