@@ -56,6 +56,8 @@ public class KeyInputHandler {
     private Set<BlockPos> processedPositions = new HashSet<BlockPos>();
     private List<BlockInfo> structureBlocks = new ArrayList<BlockInfo>();
     private List<BlockPos> structureChests = new ArrayList<BlockPos>();
+
+
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) throws IOException {
         if (KeyBindings.clearChests.isPressed()) {blockTextMap.clear(); titaniumList.clear(); processedPositions.clear();}
@@ -70,63 +72,94 @@ public class KeyInputHandler {
 
         BlockPos playerPos = player.getPosition();
         int searchRadius = 100;
-        int searchRadiusSquared = searchRadius * searchRadius;
+//        int searchRadiusSquared = searchRadius * searchRadius;
 
-        //jungle bottom
-        BlockPos startPos = new BlockPos(202, 31, 202);
-        //precursor top
-        BlockPos endPos = new BlockPos(823, 188, 823);
+//        //jungle bottom
+//        BlockPos includeStartPos = new BlockPos(202, 31, 202);
+//        //precursor top
+//        BlockPos includeEndPos = new BlockPos(823, 188, 823);
 
+        BlockPos startPos = playerPos.add(-searchRadius, -searchRadius, -searchRadius);
+        BlockPos endPos = playerPos.add(searchRadius, searchRadius, searchRadius);
 //        blockTextMap.clear();
 
-        BlockPos ignoreStartPos = new BlockPos(463, 60, 462); //nuc jungle bottom: 463 60 462
-        BlockPos ignoreEndPos = new BlockPos(564, 188, 565); //nuc prec top: 564 188 565
+//        BlockPos ignoreStartPos = new BlockPos(463, 60, 462); //nuc jungle bottom: 463 60 462
+//        BlockPos ignoreEndPos = new BlockPos(564, 188, 565); //nuc prec top: 564 188 565
+        
+        List<Block> ignoreBlocks = new ArrayList<Block>();
+        Collections.addAll(ignoreBlocks, Blocks.stone, Blocks.air, Blocks.coal_ore, Blocks.iron_ore, Blocks.prismarine, Blocks.stained_glass, Blocks.stained_glass_pane, Blocks.dirt, Blocks.stained_hardened_clay, Blocks.wool, Blocks.cobblestone, Blocks.redstone_ore, Blocks.gold_ore, Blocks.lapis_ore, Blocks.log, Blocks.clay, Blocks.emerald_ore, Blocks.planks, Blocks.leaves, Blocks.gold_block, Blocks.diamond_ore, Blocks.spruce_stairs);
+
 
         for (int x = startPos.getX(); x <= endPos.getX(); x++) {
             for (int y = startPos.getY(); y <= endPos.getY(); y++) {
                 for (int z = startPos.getZ(); z <= endPos.getZ(); z++) {
 
-                    double dx = x - playerPos.getX();
-                    double dy = y - playerPos.getY();
-                    double dz = z - playerPos.getZ();
-                    double distanceSquared = dx * dx + dy * dy + dz * dz;
-                    if (distanceSquared > searchRadiusSquared) continue;
+//                    double dx = x - playerPos.getX();
+//                    double dy = y - playerPos.getY();
+//                    double dz = z - playerPos.getZ();
+//                    double distanceSquared = dx * dx + dy * dy + dz * dz;
+//                    if (distanceSquared > searchRadiusSquared) continue;
 
-                    if (x >= ignoreStartPos.getX() && x <= ignoreEndPos.getX() &&
-                            y >= ignoreStartPos.getY() && y <= ignoreEndPos.getY() &&
-                            z >= ignoreStartPos.getZ() && z <= ignoreEndPos.getZ()) continue;
+//                    if (x >= ignoreStartPos.getX() && x <= ignoreEndPos.getX() &&
+//                            y >= ignoreStartPos.getY() && y <= ignoreEndPos.getY() &&
+//                            z >= ignoreStartPos.getZ() && z <= ignoreEndPos.getZ()) continue;
 
                     BlockPos pos = new BlockPos(x, y, z);
-                    if (world.getBlockState(pos).getBlock() == Blocks.stone) continue;
-                    if (world.getBlockState(pos).getBlock() == Blocks.air) continue;
 
-                    if (processedPositions.contains(pos)) {
-                        continue;
-                    }
+//                    if (isInRange(pos, ignoreStartPos, ignoreEndPos)) continue; //nucleus
+//                    if (!isInRange(pos, includeStartPos, includeEndPos)) continue; //outside ch
+
+                    if (ignoreBlocks.contains(world.getBlockState(pos).getBlock())) continue;
+                    if (processedPositions.contains(pos)) continue;
 
                     String blockName = getBlockRegistryName(world.getBlockState(pos).getBlock());
                     processedPositions.add(pos);
+
                     if (blockCountMap.containsKey(blockName)) {
                         blockCountMap.put(blockName, blockCountMap.get(blockName) + 1);
                     } else {
                         blockCountMap.put(blockName, 1);
                     }
 
-                    //King structure
-                    if (world.getBlockState(pos).getBlock() == Blocks.wool &&
-                            world.getBlockState(new BlockPos(x - 1, y, z)).getBlock() == Blocks.wool &&
-                            world.getBlockState(new BlockPos(x + 1, y, z)).getBlock() == Blocks.wool &&
-                            world.getBlockState(new BlockPos(x - 2, y, z)).getBlock() == Blocks.log2 &&
-                            world.getBlockState(new BlockPos(x + 2, y, z)).getBlock() == Blocks.log2 &&
-                            world.getBlockState(new BlockPos(x - 2, y + 1, z)).getBlock() == Blocks.dark_oak_stairs &&
-                            world.getBlockState(new BlockPos(x + 2, y + 1, z)).getBlock() == Blocks.dark_oak_stairs){
-
-                        BlockPos pos1 = new BlockPos(x, y - 8, z + 1);
-                        BlockPos pos2 = new BlockPos(x, y + 8, z + 1);
-
-                        blockTextMap.put(pos1,"Goblin King Tower 1");
-                        blockTextMap.put(pos2,"Goblin King Tower 2");
+                    //Goblin King Tower 385 90 572
+                    if (world.getBlockState(pos).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 0, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 1, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 0, y + 2, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + -1, y + 0, z + 1)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + 1)).getBlock() == Blocks.dark_oak_stairs &&
+                            world.getBlockState(new BlockPos(x + 3, y + -1, z + 2)).getBlock() == Blocks.log2 &&
+                            world.getBlockState(new BlockPos(x + -1, y + -1, z + 2)).getBlock() == Blocks.log2 &&
+                            world.getBlockState(new BlockPos(x + 1, y + -1, z + 0)).getBlock() == Blocks.wool &&
+                            world.getBlockState(new BlockPos(x + 2, y + -1, z + 0)).getBlock() == Blocks.wool &&
+                            world.getBlockState(new BlockPos(x + 2, y + -1, z + 1)).getBlock() == Blocks.wool &&
+                            world.getBlockState(new BlockPos(x + 1, y + -1, z + 1)).getBlock() == Blocks.wool &&
+                            world.getBlockState(new BlockPos(x + 0, y + -1, z + 1)).getBlock() == Blocks.wool) {
+                        BlockPos pos1 = new BlockPos(x + 1, y + 7, z + 2);
+                        blockTextMap.put(pos1, "Goblin King Tower 1");
+                        BlockPos pos2 = new BlockPos(x + 1, y + -9, z + 2);
+                        blockTextMap.put(pos2, "Goblin King Tower 2");
                     }
+
+/*
+/setblock 385 90 572 minecraft:dark_oak_stairs
+/setblock 387 90 572 minecraft:dark_oak_stairs
+/setblock 387 91 572 minecraft:dark_oak_stairs
+/setblock 385 91 572 minecraft:dark_oak_stairs
+/setblock 385 92 572 minecraft:dark_oak_stairs
+/setblock 384 90 573 minecraft:dark_oak_stairs
+/setblock 388 90 573 minecraft:dark_oak_stairs
+/setblock 388 89 574 minecraft:log2
+/setblock 384 89 574 minecraft:log2
+/setblock 386 89 572 minecraft:wool
+/setblock 387 89 572 minecraft:wool
+/setblock 387 89 573 minecraft:wool
+/setblock 386 89 573 minecraft:wool
+/setblock 385 89 573 minecraft:wool
+/setblock 386 97 574 minecraft:chest
+/setblock 386 81 574 minecraft:chest
+*/
 
                     //Queen structure
                     if (world.getBlockState(pos).getBlock() == Blocks.cauldron &&
@@ -809,6 +842,64 @@ public class KeyInputHandler {
 /setblock 575 117 438 minecraft:chest
 */
 
+                    //Trapped Throne 799 97 392
+                    if (world.getBlockState(pos).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -6)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + -6)).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x + -9, y + 0, z + -4)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + -9, y + 0, z + -3)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + -9, y + 0, z + -2)).getBlock() == Blocks.planks &&
+                            world.getBlockState(new BlockPos(x + -9, y + 0, z + 1)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + -9, y + 1, z + 1)).getBlock() == Blocks.cauldron &&
+                            world.getBlockState(new BlockPos(x + -9, y + 0, z + -7)).getBlock() == Blocks.anvil &&
+                            world.getBlockState(new BlockPos(x + -9, y + 1, z + -7)).getBlock() == Blocks.cauldron) {
+                        BlockPos pos1 = new BlockPos(x + -8, y + 2, z + -3);
+                        blockTextMap.put(pos1, "Trapped Throne 1");
+                    }
+
+/*
+/setblock 799 97 392 minecraft:anvil
+/setblock 799 98 392 minecraft:cauldron
+/setblock 799 97 386 minecraft:anvil
+/setblock 799 98 386 minecraft:cauldron
+/setblock 790 97 388 minecraft:planks
+/setblock 790 97 389 minecraft:planks
+/setblock 790 97 390 minecraft:planks
+/setblock 790 97 393 minecraft:anvil
+/setblock 790 98 393 minecraft:cauldron
+/setblock 790 97 385 minecraft:anvil
+/setblock 790 98 385 minecraft:cauldron
+/setblock 791 99 389 minecraft:chest
+*/
+//Water Hall 465 124 631
+                    if (world.getBlockState(pos).getBlock() == Blocks.quartz_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 0, z + 0)).getBlock() == Blocks.quartz_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + -6, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + 0, y + -6, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + 0, y + -7, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + 2, y + -7, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + 0, y + -8, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + 2, y + -8, z + 0)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + -2, y + -8, z + -1)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 4, y + -8, z + -1)).getBlock() == Blocks.cobblestone_wall) {
+                        BlockPos pos1 = new BlockPos(x + 1, y + -9, z + 0);
+                        blockTextMap.put(pos1, "Water Hall 1");
+                    }
+
+/*
+/setblock 465 124 631 minecraft:quartz_stairs
+/setblock 467 124 631 minecraft:quartz_stairs
+/setblock 467 118 631 minecraft:iron_trapdoor
+/setblock 465 118 631 minecraft:iron_trapdoor
+/setblock 465 117 631 minecraft:iron_trapdoor
+/setblock 467 117 631 minecraft:iron_trapdoor
+/setblock 465 116 631 minecraft:iron_trapdoor
+/setblock 467 116 631 minecraft:iron_trapdoor
+/setblock 463 116 630 minecraft:cobblestone_wall
+/setblock 469 116 630 minecraft:cobblestone_wall
+/setblock 466 115 631 minecraft:chest
+*/
                     
                 }
             }

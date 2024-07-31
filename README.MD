@@ -23,7 +23,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Water Hall (1)
     - [X] Colosseum (1)
     - [X] Spider's Den (2) (v)
-    - [X] Abandoned Lift (1) (v)
+    - [X] Abandoned Lift (1)
     - [X] Ruins (2)
     - [ ] Ruby Minetrack (1)
     - [ ] Ruby Bridge (1)
@@ -73,7 +73,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 
 - [ ] Goblin Holdout
     - [ ] The 3 Bears Fireplace (0)
-    - [X] Goblin King Tower (2)
+    - [X] Goblin King Tower (2) (v)
     - [X] Deep Goblin Lair (3)
     - [ ] Goblin Gold Stash (2)
     - [X] Goblin Sewer Camp (1)
@@ -153,7 +153,9 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
     - [ ] Bridge (1)
     
 
-Extra features to be added
+Extra features to be added:
+
+Fix the stupid titanium thing not going away when left clicked
 <!-- LICENSE -->
 ## License
 

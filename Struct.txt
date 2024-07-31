@@ -1,16 +1,39 @@
-//Underground Spring 569 117 436
-if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
-world.getBlockState(new BlockPos(x + 5, y + 0, z + -2)).getBlock() == Blocks.sea_lantern &&
-world.getBlockState(new BlockPos(x + 14, y + 0, z + -4)).getBlock() == Blocks.sea_lantern &&
-world.getBlockState(new BlockPos(x + 9, y + 0, z + 3)).getBlock() == Blocks.sea_lantern) {
-BlockPos pos1 = new BlockPos(x + 6, y + 0, z + 2);
-blockTextMap.put(pos1, "Underground Spring 1");
+//Goblin King Tower 385 90 572
+if (world.getBlockState(pos).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 2, y + 0, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 2, y + 1, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 0, y + 2, z + 0)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + -1, y + 0, z + 1)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 3, y + 0, z + 1)).getBlock() == Blocks.dark_oak_stairs &&
+world.getBlockState(new BlockPos(x + 3, y + -1, z + 2)).getBlock() == Blocks.log2 &&
+world.getBlockState(new BlockPos(x + -1, y + -1, z + 2)).getBlock() == Blocks.log2 &&
+world.getBlockState(new BlockPos(x + 1, y + -1, z + 0)).getBlock() == Blocks.wool &&
+world.getBlockState(new BlockPos(x + 2, y + -1, z + 0)).getBlock() == Blocks.wool &&
+world.getBlockState(new BlockPos(x + 2, y + -1, z + 1)).getBlock() == Blocks.wool &&
+world.getBlockState(new BlockPos(x + 1, y + -1, z + 1)).getBlock() == Blocks.wool &&
+world.getBlockState(new BlockPos(x + 0, y + -1, z + 1)).getBlock() == Blocks.wool) {
+BlockPos pos1 = new BlockPos(x + 1, y + 7, z + 2);
+blockTextMap.put(pos1, "Goblin King Tower 1");
+BlockPos pos2 = new BlockPos(x + 1, y + -9, z + 2);
+blockTextMap.put(pos2, "Goblin King Tower 2");
 }
 
 /*
-/setblock 569 117 436 minecraft:sea_lantern
-/setblock 574 117 434 minecraft:sea_lantern
-/setblock 583 117 432 minecraft:sea_lantern
-/setblock 578 117 439 minecraft:sea_lantern
-/setblock 575 117 438 minecraft:chest
+/setblock 385 90 572 minecraft:dark_oak_stairs
+/setblock 387 90 572 minecraft:dark_oak_stairs
+/setblock 387 91 572 minecraft:dark_oak_stairs
+/setblock 385 91 572 minecraft:dark_oak_stairs
+/setblock 385 92 572 minecraft:dark_oak_stairs
+/setblock 384 90 573 minecraft:dark_oak_stairs
+/setblock 388 90 573 minecraft:dark_oak_stairs
+/setblock 388 89 574 minecraft:log2
+/setblock 384 89 574 minecraft:log2
+/setblock 386 89 572 minecraft:wool
+/setblock 387 89 572 minecraft:wool
+/setblock 387 89 573 minecraft:wool
+/setblock 386 89 573 minecraft:wool
+/setblock 385 89 573 minecraft:wool
+/setblock 386 97 574 minecraft:chest
+/setblock 386 81 574 minecraft:chest
 */
