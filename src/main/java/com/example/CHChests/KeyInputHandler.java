@@ -850,8 +850,8 @@ public class KeyInputHandler {
                     if (world.getBlockState(pos).getBlock() == Blocks.stone){
                         int metadata = world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos));
                         if (metadata == 4) {
-                            if (isInRange(pos, new BlockPos(150, 186, -29), new BlockPos(108, 182, 112)) //walkway to king
-                                    || isInRange(pos, new BlockPos(-21, 146, -35), new BlockPos(21, 150, -110)) //forge
+                            if (isInRange(pos, new BlockPos(108, 182, -29), new BlockPos(150,186, 112)) //walkway to king
+                                    || isInRange(pos, new BlockPos(-21, 146, -110), new BlockPos(21, 150,-35)) //forge
                                     || isInRange(pos, new BlockPos(-18, 176, -62), new BlockPos(17, 176, -48))) //staircase
                             {continue;}
 

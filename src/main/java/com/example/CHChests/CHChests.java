@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 public class CHChests
 {
     public static final String MODID = "CHChests";
-    public static final String VERSION = "1.9";
+    public static final String VERSION = "1.8.2";
     private KeyInputHandler keyInputHandler;
 
 
