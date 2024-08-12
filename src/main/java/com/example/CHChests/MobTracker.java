@@ -22,13 +22,36 @@ public class MobTracker {
     private boolean trackerEnabled = false;
 
     private static Color getColorForMob(EntityLivingBase entity) {
+        if (entity instanceof EntityMooshroom) return null; // Ignore mushroom cows
         if (entity instanceof EntityCow) return Color.CYAN;
         if (entity instanceof EntityPig) return Color.PINK;
-        if (entity instanceof EntitySheep) return Color.WHITE;
-        if (entity instanceof EntityRabbit) return Color.GRAY;
+        if (entity instanceof EntitySheep && !isInExcludedArea(entity)) return Color.WHITE;
+        if (entity instanceof EntityRabbit && !isInExcludedArea(entity)) return Color.GRAY;
         if (entity instanceof EntityChicken) return Color.YELLOW;
         if (entity instanceof EntityHorse) return Color.BLACK;
         return null;
+    }
+
+    private static boolean isInExcludedArea(EntityLivingBase entity) {
+        double x = entity.posX;
+        double y = entity.posY;
+        double z = entity.posZ;
+
+        // First exclusion area for sheep
+        if (entity instanceof EntitySheep) {
+            if (x >= 341 && x <= 388 && y >= 77 && y <= 86 && z >= -415 && z <= -334) {
+                return true;
+            }
+        }
+
+        // Second exclusion area for sheep and rabbits
+        if ((entity instanceof EntitySheep || entity instanceof EntityRabbit)) {
+            if (x >= 89 && x <= 206 && y >= 61 && y <= 96 && z >= -584 && z <= -404) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @SubscribeEvent
@@ -147,8 +170,6 @@ public class MobTracker {
         GlStateManager.enableTexture2D();
         GlStateManager.popMatrix();
     }
-
-
 
     public void onKeyPress() {
         if (KeyBindings.toggleTracker.isPressed()) {
