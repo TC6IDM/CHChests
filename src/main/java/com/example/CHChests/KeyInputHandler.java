@@ -85,9 +85,9 @@ public class KeyInputHandler {
 
 //        BlockPos ignoreStartPos = new BlockPos(463, 60, 462); //nuc jungle bottom: 463 60 462
 //        BlockPos ignoreEndPos = new BlockPos(564, 188, 565); //nuc prec top: 564 188 565
-        
+
         List<Block> ignoreBlocks = new ArrayList<Block>();
-        Collections.addAll(ignoreBlocks, Blocks.stone, Blocks.air, Blocks.coal_ore, Blocks.iron_ore, Blocks.prismarine, Blocks.stained_glass, Blocks.stained_glass_pane, Blocks.dirt, Blocks.stained_hardened_clay, Blocks.wool, Blocks.cobblestone, Blocks.redstone_ore, Blocks.gold_ore, Blocks.lapis_ore, Blocks.log, Blocks.clay, Blocks.emerald_ore, Blocks.planks, Blocks.leaves, Blocks.gold_block, Blocks.diamond_ore, Blocks.spruce_stairs);
+        Collections.addAll(ignoreBlocks, Blocks.stone, Blocks.air, Blocks.bedrock, Blocks.coal_ore, Blocks.iron_ore, Blocks.prismarine, Blocks.stained_glass, Blocks.stained_glass_pane, Blocks.dirt, Blocks.stained_hardened_clay, Blocks.wool, Blocks.cobblestone, Blocks.redstone_ore, Blocks.gold_ore, Blocks.lapis_ore, Blocks.log, Blocks.clay, Blocks.emerald_ore, Blocks.planks, Blocks.leaves, Blocks.gold_block, Blocks.diamond_ore, Blocks.spruce_stairs, Blocks.stonebrick);
 
 
         for (int x = startPos.getX(); x <= endPos.getX(); x++) {
@@ -900,7 +900,27 @@ public class KeyInputHandler {
 /setblock 469 116 630 minecraft:cobblestone_wall
 /setblock 466 115 631 minecraft:chest
 */
-                    
+
+                    //Goblin Wide Pit 233 123 714
+                    if (world.getBlockState(pos).getBlock() == Blocks.skull &&
+                            world.getBlockState(new BlockPos(x + 4, y + -1, z + 3)).getBlock() == Blocks.skull &&
+                            world.getBlockState(new BlockPos(x + 7, y + -2, z + 3)).getBlock() == Blocks.skull &&
+                            world.getBlockState(new BlockPos(x + 3, y + -3, z + 3)).getBlock() == Blocks.wooden_slab &&
+                            world.getBlockState(new BlockPos(x + 5, y + -3, z + 2)).getBlock() == Blocks.spruce_stairs &&
+                            world.getBlockState(new BlockPos(x + 6, y + 2, z + 3)).getBlock() == Blocks.wool) {
+                        BlockPos pos1 = new BlockPos(x + 3, y + -2, z + 1);
+                        blockTextMap.put(pos1, "Goblin Wide Pit 1");
+                    }
+
+/*
+/setblock 233 123 714 minecraft:skull
+/setblock 237 122 717 minecraft:skull
+/setblock 240 121 717 minecraft:skull
+/setblock 236 120 717 minecraft:wooden_slab
+/setblock 238 120 716 minecraft:spruce_stairs
+/setblock 239 125 717 minecraft:wool
+/setblock 236 121 715 minecraft:chest
+*/
                 }
             }
         }

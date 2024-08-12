@@ -8,6 +8,9 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 
 * Default Keybind for scan: ```K```
 * Default Keybind for removing all waypoints: ```L```
+* Default Keybind for scanning for titanium: ``+``
+* Default Keybind for trapper helper: ``*``
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -155,7 +158,13 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 
 Extra features to be added:
 
-Fix the stupid titanium thing not going away when left clicked
+Fix the stupid titanium thing not going away when left 
+
+auto updates
+
+make it compatable with lconfig
+
+
 <!-- LICENSE -->
 ## License
 

@@ -10,6 +10,7 @@ public class KeyBindings {
     public static KeyBinding addBlock;
     public static KeyBinding done;
     public static KeyBinding findTitanium;
+    public static KeyBinding toggleTracker;
 
 
     public static void init() {
@@ -27,5 +28,8 @@ public class KeyBindings {
 
         findTitanium = new KeyBinding("key.find_titanium", Keyboard.KEY_ADD, "key.categories.CHChests");
         ClientRegistry.registerKeyBinding(findTitanium);
+
+        toggleTracker = new KeyBinding("key.toggleTracker", Keyboard.KEY_MULTIPLY, "key.categories.tracker");
+        ClientRegistry.registerKeyBinding(toggleTracker);
     }
 }
