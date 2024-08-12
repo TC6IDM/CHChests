@@ -23,12 +23,12 @@ public class MobTracker {
 
     private static Color getColorForMob(EntityLivingBase entity) {
         if (entity instanceof EntityMooshroom) return null; // Ignore mushroom cows
-        if (entity instanceof EntityCow) return Color.CYAN;
+        if (entity instanceof EntityCow) return Color.RED;
         if (entity instanceof EntityPig) return Color.PINK;
         if (entity instanceof EntitySheep && !isInExcludedArea(entity)) return Color.WHITE;
-        if (entity instanceof EntityRabbit && !isInExcludedArea(entity)) return Color.GRAY;
+        if (entity instanceof EntityRabbit && !isInExcludedArea(entity)) return Color.GREEN;
         if (entity instanceof EntityChicken) return Color.YELLOW;
-        if (entity instanceof EntityHorse) return Color.BLACK;
+        if (entity instanceof EntityHorse) return Color.BLUE;
         return null;
     }
 
@@ -47,6 +47,13 @@ public class MobTracker {
         // Second exclusion area for sheep and rabbits
         if ((entity instanceof EntitySheep || entity instanceof EntityRabbit)) {
             if (x >= 89 && x <= 206 && y >= 61 && y <= 96 && z >= -584 && z <= -404) {
+                return true;
+            }
+        }
+
+        // Third exclusion area for cows
+        if (entity instanceof EntityCow) {
+            if (x >= 168 && x <= 186 && y >= 27 && y <= 34 && z >= -503 && z <= -483) {
                 return true;
             }
         }
