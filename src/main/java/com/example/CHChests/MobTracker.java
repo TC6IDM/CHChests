@@ -23,7 +23,7 @@ public class MobTracker {
 
     private static Color getColorForMob(EntityLivingBase entity) {
         if (entity instanceof EntityMooshroom) return null; // Ignore mushroom cows
-        if (entity instanceof EntityCow) return Color.RED;
+        if (entity instanceof EntityCow && !isInExcludedArea(entity)) return Color.RED;
         if (entity instanceof EntityPig) return Color.PINK;
         if (entity instanceof EntitySheep && !isInExcludedArea(entity)) return Color.WHITE;
         if (entity instanceof EntityRabbit && !isInExcludedArea(entity)) return Color.GREEN;
