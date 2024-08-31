@@ -51,6 +51,7 @@ public class CommandCHCLocateClient extends CommandBase {
     }
 
     private void executeCommandSequence(final ICommandSender sender) {
+
         // Start the sequence with /warp ch
         ChatComponentText chatMessage = new ChatComponentText("Warping to CH");
         mc.thePlayer.addChatMessage(chatMessage);
@@ -61,36 +62,28 @@ public class CommandCHCLocateClient extends CommandBase {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                // Send /locraw after 5 seconds
-                mc.thePlayer.sendChatMessage("/locraw");
+                // Check if the condition is met after 5 seconds
+                if (conditionMet) {
+                    ChatComponentText successMessage = new ChatComponentText("Target Server Found " + targetServer);
+                    mc.thePlayer.addChatMessage(successMessage);
+                    stopLoop(); // Stop the sequence if the server matches
+                } else {
+                    ChatComponentText chatMessage = new ChatComponentText("Server Doesn't Match - Target: " + targetServer+ " Actual: " + serverName+ " Warping home...");
+                    mc.thePlayer.addChatMessage(chatMessage);
+                    mc.thePlayer.sendChatMessage("/warp home"); // Warp home if the server doesn't match
 
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // Check if the condition is met after /locraw, if not continue with /warp home
-                        if (!conditionMet) {
-                            ChatComponentText chatMessage = new ChatComponentText("Server Doesn't Match - Target: " + targetServer+ " Actual: " + serverName+ " Warping home");
-                            mc.thePlayer.addChatMessage(chatMessage);
-                            mc.thePlayer.sendChatMessage("/warp home");
-
-                            timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    // After 5 seconds, start the sequence again with /warp ch
-                                    executeCommandSequence(sender);
-                                }
-                            }, 5000);
-                        } else {
-                            // Condition met, stop the loop
-                            ChatComponentText chatMessage = new ChatComponentText("Found Server " + targetServer);
-                            mc.thePlayer.addChatMessage(chatMessage);
-                            stopLoop();
+                    // Wait another 5 seconds before restarting the sequence
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            ChatComponentText retryMessage = new ChatComponentText("Retrying sequence...");
+                            mc.thePlayer.addChatMessage(retryMessage);
+                            executeCommandSequence(sender); // Restart the sequence
                         }
-                    }
-                }, 5000);
+                    }, 5000); // Wait 5 seconds after /warp home
+                }
             }
-        }, 5000);
-
+        }, 5000); // Wait 5 seconds after /warp ch
     }
 
 
@@ -105,36 +98,25 @@ public class CommandCHCLocateClient extends CommandBase {
     public void onChatReceived(ClientChatReceivedEvent event) {
         // This event is triggered whenever a chat message is received
         System.out.println("Chat message received: " + event.message.getUnformattedText());
-        serverName = "";
+        serverName = "NONE";
         String message = event.message.getUnformattedText();
         System.out.println("CHC MESSAGE: "+ message);
 
-        // Extract the JSON part of the message
-        int jsonStartIndex = message.indexOf("{");
-        if (jsonStartIndex != -1) {
-            System.out.println("CHC index: "+ jsonStartIndex);
-            String jsonPart = message.substring(jsonStartIndex);
+        if (message.contains("Sending to server")) {
+            // Extract the server name using simple string manipulation
+            int startIndex = message.indexOf("Sending to server") + "Sending to server ".length();
+            int endIndex = message.indexOf("...", startIndex);
+            if (endIndex != -1) {
+                serverName = message.substring(startIndex, endIndex).trim();
+                System.out.println("Found server: " + serverName);
 
-            // Parse the extracted JSON string
-            try {
-                JsonParser parser = new JsonParser();
-                JsonObject jsonMessage = parser.parse(jsonPart).getAsJsonObject();
-                System.out.println("CHC json: "+ jsonMessage);
-
-                // Check if the JSON message has a "server" field
-                if (jsonMessage.has("server")) {
-                    serverName = jsonMessage.get("server").getAsString();
-                    System.out.println("found server: "+serverName );
-                    System.out.println("target server: "+targetServer);
-                    // Check if the server name matches the target server
-                    if (serverName.equalsIgnoreCase(targetServer)) {
-                        System.out.println("server equal");
-                        stopLoop();
-                    }
+                // Check if the server name matches the target server
+                if (serverName.equalsIgnoreCase(targetServer)) {
+                    System.out.println("Server matched: " + serverName);
+                    stopLoop();
+                } else {
+                    System.out.println("Server doesn't match. Target: " + targetServer + ", Actual: " + serverName);
                 }
-            } catch (Exception e) {
-                // If there's an error parsing the message, ignore it
-                e.printStackTrace();
             }
         }
     }

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 public class CHChests
 {
     public static final String MODID = "CHChests";
-    public static final String VERSION = "1.10.0";
+    public static final String VERSION = "1.10.1";
     private KeyInputHandler keyInputHandler;
     private MobTracker mobTracker;
 
