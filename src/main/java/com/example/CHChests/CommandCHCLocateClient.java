@@ -98,7 +98,7 @@ public class CommandCHCLocateClient extends CommandBase {
     public void onChatReceived(ClientChatReceivedEvent event) {
         // This event is triggered whenever a chat message is received
         System.out.println("Chat message received: " + event.message.getUnformattedText());
-        serverName = "NONE";
+//        serverName = "NONE";
         String message = event.message.getUnformattedText();
         System.out.println("CHC MESSAGE: "+ message);
 
