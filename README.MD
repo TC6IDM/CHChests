@@ -2,6 +2,16 @@
 ## About The Project - CHChests
 
 This is a mod for Hypixel skyblock which scans the surroundings of the crystal hollows to check for any chests.
+AND MORE!!
+
+
+<!-- FEATURES -->
+##Features
+
+1. Crystal Hollows Chest Finder
+2. Titanium Finder
+3. Trapper Helper
+4. Server Finder
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -10,6 +20,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 * Default Keybind for removing all waypoints: ```L```
 * Default Keybind for scanning for titanium: ``+``
 * Default Keybind for trapper helper: ``*``
+* command for Server Finder: /chc [locate/stop] <//server//>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -158,7 +169,7 @@ This is a mod for Hypixel skyblock which scans the surroundings of the crystal h
 
 Extra features to be added:
 
-Fix the stupid titanium thing not going away when left 
+Fix the stupid titanium thing not going away when left clicked
 
 auto updates
 

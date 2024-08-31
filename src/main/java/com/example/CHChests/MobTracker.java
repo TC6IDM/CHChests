@@ -39,14 +39,14 @@ public class MobTracker {
 
         // First exclusion area for sheep
         if (entity instanceof EntitySheep) {
-            if (x >= 341 && x <= 388 && y >= 77 && y <= 86 && z >= -415 && z <= -334) {
+            if (x >= 331 && x <= 400 && y >= 77 && y <= 86 && z >= -415 && z <= -334) {
                 return true;
             }
         }
 
         // Second exclusion area for sheep and rabbits
         if ((entity instanceof EntitySheep || entity instanceof EntityRabbit)) {
-            if (x >= 89 && x <= 206 && y >= 61 && y <= 96 && z >= -584 && z <= -404) {
+            if (x >= 85 && x <= 206 && y >= 59 && y <= 96 && z >= -584 && z <= -398) {
                 return true;
             }
         }

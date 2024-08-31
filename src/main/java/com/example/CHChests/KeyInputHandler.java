@@ -872,35 +872,38 @@ public class KeyInputHandler {
 /setblock 790 98 385 minecraft:cauldron
 /setblock 791 99 389 minecraft:chest
 */
-//Water Hall 465 124 631
-                    if (world.getBlockState(pos).getBlock() == Blocks.quartz_stairs &&
-                            world.getBlockState(new BlockPos(x + 2, y + 0, z + 0)).getBlock() == Blocks.quartz_stairs &&
-                            world.getBlockState(new BlockPos(x + 2, y + -6, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + 0, y + -6, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + 0, y + -7, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + 2, y + -7, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + 0, y + -8, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + 2, y + -8, z + 0)).getBlock() == Blocks.iron_trapdoor &&
-                            world.getBlockState(new BlockPos(x + -2, y + -8, z + -1)).getBlock() == Blocks.cobblestone_wall &&
-                            world.getBlockState(new BlockPos(x + 4, y + -8, z + -1)).getBlock() == Blocks.cobblestone_wall) {
-                        BlockPos pos1 = new BlockPos(x + 1, y + -9, z + 0);
+//Water Hall 574 122 418
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + 1)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 1)).getBlock() == Blocks.carpet &&
+                            world.getBlockState(new BlockPos(x + 0, y + 1, z + 0)).getBlock() == Blocks.carpet &&
+                            world.getBlockState(new BlockPos(x + -6, y + 0, z + 1)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -6, y + 0, z + 0)).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + -6, y + 1, z + 0)).getBlock() == Blocks.carpet &&
+                            world.getBlockState(new BlockPos(x + -6, y + 1, z + 1)).getBlock() == Blocks.carpet &&
+                            world.getBlockState(new BlockPos(x + -2, y + 1, z + 6)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + -2, y + 2, z + 6)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + -4, y + 1, z + 6)).getBlock() == Blocks.iron_trapdoor &&
+                            world.getBlockState(new BlockPos(x + -4, y + 2, z + 6)).getBlock() == Blocks.iron_trapdoor) {
+                        BlockPos pos1 = new BlockPos(x + -3, y + 1, z + 6);
                         blockTextMap.put(pos1, "Water Hall 1");
                     }
 
 /*
-/setblock 465 124 631 minecraft:quartz_stairs
-/setblock 467 124 631 minecraft:quartz_stairs
-/setblock 467 118 631 minecraft:iron_trapdoor
-/setblock 465 118 631 minecraft:iron_trapdoor
-/setblock 465 117 631 minecraft:iron_trapdoor
-/setblock 467 117 631 minecraft:iron_trapdoor
-/setblock 465 116 631 minecraft:iron_trapdoor
-/setblock 467 116 631 minecraft:iron_trapdoor
-/setblock 463 116 630 minecraft:cobblestone_wall
-/setblock 469 116 630 minecraft:cobblestone_wall
-/setblock 466 115 631 minecraft:chest
+/setblock 574 122 418 minecraft:sea_lantern
+/setblock 574 122 419 minecraft:sea_lantern
+/setblock 574 123 419 minecraft:carpet
+/setblock 574 123 418 minecraft:carpet
+/setblock 568 122 419 minecraft:sea_lantern
+/setblock 568 122 418 minecraft:sea_lantern
+/setblock 568 123 418 minecraft:carpet
+/setblock 568 123 419 minecraft:carpet
+/setblock 572 123 424 minecraft:iron_trapdoor
+/setblock 572 124 424 minecraft:iron_trapdoor
+/setblock 570 123 424 minecraft:iron_trapdoor
+/setblock 570 124 424 minecraft:iron_trapdoor
+/setblock 571 123 424 minecraft:chest
 */
-
                     //Goblin Wide Pit 233 123 714
                     if (world.getBlockState(pos).getBlock() == Blocks.skull &&
                             world.getBlockState(new BlockPos(x + 4, y + -1, z + 3)).getBlock() == Blocks.skull &&
@@ -920,6 +923,77 @@ public class KeyInputHandler {
 /setblock 238 120 716 minecraft:spruce_stairs
 /setblock 239 125 717 minecraft:wool
 /setblock 236 121 715 minecraft:chest
+*/
+
+                    //Granite Walkway 802 166 313
+                    if (world.getBlockState(pos).getBlock() == Blocks.netherrack &&
+                            world.getBlockState(new BlockPos(x + -8, y + 0, z + 0)).getBlock() == Blocks.netherrack &&
+                            world.getBlockState(new BlockPos(x + -8, y + 0, z + -6)).getBlock() == Blocks.netherrack &&
+                            world.getBlockState(new BlockPos(x + 0, y + 0, z + -6)).getBlock() == Blocks.netherrack &&
+                            world.getBlockState(new BlockPos(x + -11, y + -5, z + 0)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + -11, y + -4, z + 0)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + -11, y + -3, z + 0)).getBlock() == Blocks.log) {
+                        BlockPos pos1 = new BlockPos(x + -2, y + -5, z + 4);
+                        blockTextMap.put(pos1, "Granite Walkway 1");
+                        BlockPos pos2 = new BlockPos(x + -4, y + -4, z + 6);
+                        blockTextMap.put(pos2, "Granite Walkway 2");
+                        BlockPos pos3 = new BlockPos(x + -4, y + 0, z + 8);
+                        blockTextMap.put(pos3, "Granite Walkway 3");
+                    }
+
+/*
+/setblock 802 166 313 minecraft:netherrack
+/setblock 794 166 313 minecraft:netherrack
+/setblock 794 166 307 minecraft:netherrack
+/setblock 802 166 307 minecraft:netherrack
+/setblock 791 161 313 minecraft:log
+/setblock 791 162 313 minecraft:log
+/setblock 791 163 313 minecraft:log
+/setblock 800 161 317 minecraft:chest
+/setblock 798 162 319 minecraft:chest
+/setblock 798 166 321 minecraft:chest
+*/
+
+                    //Ruby Bridge 745 169 256
+                    if (world.getBlockState(pos).getBlock() == Blocks.jungle_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 0, z + 0)).getBlock() == Blocks.jungle_stairs &&
+                            world.getBlockState(new BlockPos(x + 6, y + -1, z + -3)).getBlock() == Blocks.spruce_stairs &&
+                            world.getBlockState(new BlockPos(x + 6, y + -2, z + -2)).getBlock() == Blocks.spruce_stairs &&
+                            world.getBlockState(new BlockPos(x + 7, y + -3, z + 18)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + 6, y + -3, z + 18)).getBlock() == Blocks.log &&
+                            world.getBlockState(new BlockPos(x + 5, y + -3, z + 18)).getBlock() == Blocks.log) {
+                        BlockPos pos1 = new BlockPos(x + 6, y + -2, z + 18);
+                        blockTextMap.put(pos1, "Ruby Bridge 1");
+                    }
+
+/*
+/setblock 745 169 256 minecraft:jungle_stairs
+/setblock 746 169 256 minecraft:jungle_stairs
+/setblock 751 168 253 minecraft:spruce_stairs
+/setblock 751 167 254 minecraft:spruce_stairs
+/setblock 752 166 274 minecraft:log
+/setblock 751 166 274 minecraft:log
+/setblock 750 166 274 minecraft:log
+/setblock 751 167 274 minecraft:chest
+*/
+
+                    //Pavilion 566 124 376
+                    if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+                            world.getBlockState(new BlockPos(x + 4, y + 2, z + 4)).getBlock() == Blocks.cobblestone_wall &&
+                            world.getBlockState(new BlockPos(x + 3, y + 0, z + 2)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 2, y + 0, z + 3)).getBlock() == Blocks.stone_brick_stairs &&
+                            world.getBlockState(new BlockPos(x + 1, y + 9, z + 2)).getBlock() == Blocks.leaves) {
+                        BlockPos pos1 = new BlockPos(x + 0, y + 1, z + 0);
+                        blockTextMap.put(pos1, "Pavilion 1");
+                    }
+
+/*
+/setblock 566 124 376 minecraft:sea_lantern
+/setblock 570 126 380 minecraft:cobblestone_wall
+/setblock 569 124 378 minecraft:stone_brick_stairs
+/setblock 568 124 379 minecraft:stone_brick_stairs
+/setblock 567 133 378 minecraft:leaves
+/setblock 566 125 376 minecraft:chest
 */
                 }
             }

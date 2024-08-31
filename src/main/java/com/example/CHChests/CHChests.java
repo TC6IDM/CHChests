@@ -1,6 +1,7 @@
 package com.example.CHChests;
 
 import net.minecraft.init.Blocks;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -14,7 +15,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 public class CHChests
 {
     public static final String MODID = "CHChests";
-    public static final String VERSION = "1.9.3";
+    public static final String VERSION = "1.10.0";
     private KeyInputHandler keyInputHandler;
     private MobTracker mobTracker;
 
@@ -28,6 +29,11 @@ public class CHChests
         MinecraftForge.EVENT_BUS.register(mobTracker);
         MinecraftForge.EVENT_BUS.register(this);
         KeyBindings.init();
+
+        CommandCHCLocateClient newcmd = new CommandCHCLocateClient();
+        ClientCommandHandler.instance.registerCommand(newcmd);
+        MinecraftForge.EVENT_BUS.register(newcmd);
+
     }
 
     @EventHandler

@@ -1,20 +1,18 @@
-//Goblin Wide Pit 233 123 714
-if (world.getBlockState(pos).getBlock() == Blocks.skull &&
-world.getBlockState(new BlockPos(x + 4, y + -1, z + 3)).getBlock() == Blocks.skull &&
-world.getBlockState(new BlockPos(x + 7, y + -2, z + 3)).getBlock() == Blocks.skull &&
-world.getBlockState(new BlockPos(x + 3, y + -3, z + 3)).getBlock() == Blocks.wooden_slab &&
-world.getBlockState(new BlockPos(x + 5, y + -3, z + 2)).getBlock() == Blocks.spruce_stairs &&
-world.getBlockState(new BlockPos(x + 6, y + 2, z + 3)).getBlock() == Blocks.wool) {
-BlockPos pos1 = new BlockPos(x + 3, y + -2, z + 1);
-blockTextMap.put(pos1, "Goblin Wide Pit 1");
+//Pavilion 566 124 376
+if (world.getBlockState(pos).getBlock() == Blocks.sea_lantern &&
+world.getBlockState(new BlockPos(x + 4, y + 2, z + 4)).getBlock() == Blocks.cobblestone_wall &&
+world.getBlockState(new BlockPos(x + 3, y + 0, z + 2)).getBlock() == Blocks.stone_brick_stairs &&
+world.getBlockState(new BlockPos(x + 2, y + 0, z + 3)).getBlock() == Blocks.stone_brick_stairs &&
+world.getBlockState(new BlockPos(x + 1, y + 9, z + 2)).getBlock() == Blocks.leaves) {
+BlockPos pos1 = new BlockPos(x + 0, y + 1, z + 0);
+blockTextMap.put(pos1, "Pavilion 1");
 }
 
 /*
-/setblock 233 123 714 minecraft:skull
-/setblock 237 122 717 minecraft:skull
-/setblock 240 121 717 minecraft:skull
-/setblock 236 120 717 minecraft:wooden_slab
-/setblock 238 120 716 minecraft:spruce_stairs
-/setblock 239 125 717 minecraft:wool
-/setblock 236 121 715 minecraft:chest
+/setblock 566 124 376 minecraft:sea_lantern
+/setblock 570 126 380 minecraft:cobblestone_wall
+/setblock 569 124 378 minecraft:stone_brick_stairs
+/setblock 568 124 379 minecraft:stone_brick_stairs
+/setblock 567 133 378 minecraft:leaves
+/setblock 566 125 376 minecraft:chest
 */
