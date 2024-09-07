@@ -1,7 +1,7 @@
-package org.polyfrost.example.config;
+package com.example.CHChests.config;
 
-import org.polyfrost.example.ExampleMod;
-import org.polyfrost.example.hud.TestHud;
+import com.example.CHChests.CHChests;
+import com.example.CHChests.hud.TestHud;
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.Dropdown;
 import cc.polyfrost.oneconfig.config.annotations.HUD;
@@ -41,7 +41,7 @@ public class TestConfig extends Config {
     public static int exampleDropdown = 1; // Default option (in this case "Option 2")
 
     public TestConfig() {
-        super(new Mod(ExampleMod.NAME, ModType.UTIL_QOL), ExampleMod.MODID + ".json");
+        super(new Mod(CHChests.NAME, ModType.UTIL_QOL), CHChests.MODID + ".json");
         initialize();
     }
 }

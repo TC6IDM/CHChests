@@ -17,6 +17,10 @@ plugins {
     java
 }
 
+java {
+    withSourcesJar()
+}
+
 // Gets the mod name, version and id from the `gradle.properties` file.
 val mod_name: String by project
 val mod_version: String by project
@@ -34,7 +38,7 @@ blossom {
 version = mod_version
 // Sets the group, make sure to change this to your own. It can be a website you own backwards or your GitHub username.
 // e.g. com.github.<your username> or com.<your domain>
-group = "org.polyfrost"
+group = "com.github.TC6IDM"
 
 // Sets the name of the output jar (the one you put in your mods folder and send to other people)
 // It outputs all versions of the mod into the `versions/{mcVersion}/build` directory.
@@ -167,11 +171,13 @@ tasks {
         archiveClassifier.set("dev")
         configurations = listOf(shade, modShade)
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        destinationDirectory.set(layout.buildDirectory.dir("libs")) // Updated to avoid deprecation warning
     }
 
     remapJar {
         inputFile.set(shadowJar.get().archiveFile)
         archiveClassifier.set("")
+        destinationDirectory.set(layout.buildDirectory.dir("libs")) // Updated to avoid deprecation warning
     }
 
     jar {
@@ -187,6 +193,6 @@ tasks {
         }
         dependsOn(shadowJar)
         archiveClassifier.set("")
-        enabled = false
+        enabled = true
     }
 }
