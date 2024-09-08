@@ -19,26 +19,33 @@ public class TestConfig extends Config {
     @HUD(
             name = "Example HUD"
     )
-    public TestHud hud = new TestHud();
+//    public TestHud hud = new TestHud();
 
     @Switch(
-            name = "Example Switch",
+            name = "Mob Tracker",
             size = OptionSize.SINGLE // Optional
     )
-    public static boolean exampleSwitch = false; // The default value for the boolean Switch.
+    public static boolean trackerEnabled = false; // The default value for the boolean Switch.
 
     @Slider(
-            name = "Example Slider",
-            min = 0f, max = 100f, // Minimum and maximum values for the slider.
+            name = "Crystal Hollows Chest Search Distance",
+            min = 0f, max = 500f, // Minimum and maximum values for the slider.
             step = 10 // The amount of steps that the slider should have.
     )
-    public static float exampleSlider = 50f; // The default value for the float Slider.
+    public static float CHRadius = 200f; // The default value for the float Slider.
 
-    @Dropdown(
-            name = "Example Dropdown", // Name of the Dropdown
-            options = {"Option 1", "Option 2", "Option 3", "Option 4"} // Options available.
+    @Slider(
+            name = "Dwarven Mines Titanium Search Distance",
+            min = 0f, max = 500f, // Minimum and maximum values for the slider.
+            step = 10 // The amount of steps that the slider should have.
     )
-    public static int exampleDropdown = 1; // Default option (in this case "Option 2")
+    public static float TitaniumRadius = 200f; // The default value for the float Slider.
+
+//    @Dropdown(
+//            name = "Example Dropdown", // Name of the Dropdown
+//            options = {"Option 1", "Option 2", "Option 3", "Option 4"} // Options available.
+//    )
+//    public static int exampleDropdown = 1; // Default option (in this case "Option 2")
 
     public TestConfig() {
         super(new Mod(CHChests.NAME, ModType.UTIL_QOL), CHChests.MODID + ".json");

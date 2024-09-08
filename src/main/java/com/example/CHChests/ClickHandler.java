@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ClickHandler {
-    private final KeyInputHandler keyInputHandler;
+    private final CHChestsFinder chchestsfinder;
+    private final TitaniumFinder titaniumFinder;
 
-    public ClickHandler(KeyInputHandler keyInputHandler) {
-        this.keyInputHandler = keyInputHandler;
+    public ClickHandler(CHChestsFinder chchestsfinder, TitaniumFinder titaniumFinder) {
+        this.chchestsfinder = chchestsfinder;
+        this.titaniumFinder = titaniumFinder;
     }
 
     @SubscribeEvent
@@ -20,14 +22,14 @@ public class ClickHandler {
         //remove chest when right clicked
         if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
             BlockPos clickedPos = event.pos;
-            Map<BlockPos, String> blockTextMap = keyInputHandler.getBlockTextMap();
+            Map<BlockPos, String> blockTextMap = chchestsfinder.getBlockTextMap();
             blockTextMap.remove(clickedPos);
         }
 
         //remove titanium when left clicked
         if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
             BlockPos clickedPos = event.pos;
-            List<BlockPos> titaniumList = keyInputHandler.getTitaniumList();
+            List<BlockPos> titaniumList = titaniumFinder.getTitaniumList();
             titaniumList.remove(clickedPos);
         }
     }

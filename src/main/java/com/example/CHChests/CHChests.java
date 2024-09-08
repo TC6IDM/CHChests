@@ -30,7 +30,9 @@ public class CHChests {
     @Mod.Instance(MODID)
     public static CHChests INSTANCE; // Adds the instance of the mod, so we can access other variables.
     public static TestConfig config;
-    private KeyInputHandler keyInputHandler;
+    private StructureBuilder structureBuilder;
+    private TitaniumFinder titaniumFinder;
+    private CHChestsFinder chchestsfinder;
     private MobTracker mobTracker;
 
     // Register the config and commands.
@@ -43,10 +45,16 @@ public class CHChests {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        keyInputHandler = new KeyInputHandler();
-        MinecraftForge.EVENT_BUS.register(keyInputHandler);
-        MinecraftForge.EVENT_BUS.register(new ClickHandler(keyInputHandler));
-        mobTracker = new MobTracker();
+        structureBuilder = new StructureBuilder(config);
+        MinecraftForge.EVENT_BUS.register(structureBuilder);
+        titaniumFinder = new TitaniumFinder(config);
+        MinecraftForge.EVENT_BUS.register(titaniumFinder);
+        chchestsfinder = new CHChestsFinder(config);
+        MinecraftForge.EVENT_BUS.register(chchestsfinder);
+
+
+        MinecraftForge.EVENT_BUS.register(new ClickHandler(chchestsfinder, titaniumFinder));
+        mobTracker = new MobTracker(config);
         MinecraftForge.EVENT_BUS.register(mobTracker);
         MinecraftForge.EVENT_BUS.register(this);
         KeyBindings.init();

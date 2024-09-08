@@ -1,5 +1,6 @@
 package com.example.CHChests;
 
+import com.example.CHChests.config.TestConfig;
 import com.google.common.base.Predicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,7 +20,11 @@ import java.awt.*;
 public class MobTracker {
 
     private static final Minecraft mc = Minecraft.getMinecraft();
-    private boolean trackerEnabled = false;
+    private final TestConfig testConfig;
+
+    public MobTracker(TestConfig c) {
+        testConfig = c;
+    }
 
     private static Color getColorForMob(EntityLivingBase entity) {
         if (entity instanceof EntityMooshroom) return null; // Ignore mushroom cows
@@ -63,7 +68,7 @@ public class MobTracker {
 
     @SubscribeEvent
     public void onRenderLiving(RenderLivingEvent.Pre<EntityLivingBase> event) {
-        if (trackerEnabled) {
+        if (testConfig.trackerEnabled) {
             EntityLivingBase entity = event.entity;
             Color color = getColorForMob(entity);
 
@@ -75,7 +80,7 @@ public class MobTracker {
 
     @SubscribeEvent
     public void onRenderWorldLast(RenderWorldLastEvent event) {
-        if (trackerEnabled) {
+        if (testConfig.trackerEnabled) {
             for (EntityLivingBase entity : mc.theWorld.getEntities(EntityLivingBase.class, new Predicate<EntityLivingBase>() {
                 @Override
                 public boolean apply(@Nullable EntityLivingBase e) {
@@ -180,7 +185,7 @@ public class MobTracker {
 
     public void onKeyPress() {
         if (KeyBindings.toggleTracker.isPressed()) {
-            trackerEnabled = !trackerEnabled;
+            testConfig.trackerEnabled = !testConfig.trackerEnabled;
         }
     }
 }
