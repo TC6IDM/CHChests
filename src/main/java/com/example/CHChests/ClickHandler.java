@@ -1,6 +1,5 @@
 package com.example.CHChests;
 
-import net.minecraft.block.BlockChest;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
