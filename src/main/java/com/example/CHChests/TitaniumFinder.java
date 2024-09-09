@@ -20,16 +20,16 @@ import java.util.List;
 
 public class TitaniumFinder {
     private TestConfig config;
-    private List<BlockPos> titaniumList = new ArrayList<BlockPos>();
+    private List<BlockPos> titaniumList;
     public List<BlockPos> getTitaniumList() {return titaniumList;}
 
-    public TitaniumFinder(TestConfig c) {
+    public TitaniumFinder(TestConfig c, List<BlockPos> t) {
         config = c;
+        titaniumList = t;
     }
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) throws IOException {
-        if (KeyBindings.clearChests.isPressed()) titaniumList.clear();
         if (KeyBindings.findTitanium.isPressed()) findTitanium();
     }
 
@@ -84,7 +84,7 @@ public class TitaniumFinder {
         double playerY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
         double playerZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
 
-        if (!titaniumList.isEmpty()) {
+        if (!titaniumList.isEmpty() && config.DwarvenMinesWaypoints) {
             GL11.glPushMatrix();
             GL11.glTranslated(-playerX, -playerY, -playerZ);
             GL11.glDisable(GL11.GL_TEXTURE_2D);

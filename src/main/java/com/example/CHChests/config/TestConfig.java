@@ -34,12 +34,25 @@ public class TestConfig extends Config {
     )
     public static float CHRadius = 200f; // The default value for the float Slider.
 
+    @Switch(
+            name = "Crystal Hollows Chest Waypoints",
+            size = OptionSize.SINGLE // Optional
+    )
+    public static boolean CrystalHollowsWaypoints = true; // The default value for the boolean Switch.
+
     @Slider(
             name = "Dwarven Mines Titanium Search Distance",
             min = 0f, max = 500f, // Minimum and maximum values for the slider.
             step = 10 // The amount of steps that the slider should have.
     )
     public static float TitaniumRadius = 200f; // The default value for the float Slider.
+
+    @Switch(
+            name = "Dwarven Mines Titanium Waypoints",
+            size = OptionSize.SINGLE // Optional
+    )
+    public static boolean DwarvenMinesWaypoints = true; // The default value for the boolean Switch.
+
 
 //    @Dropdown(
 //            name = "Example Dropdown", // Name of the Dropdown

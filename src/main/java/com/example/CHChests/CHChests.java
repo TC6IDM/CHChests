@@ -1,6 +1,7 @@
 package com.example.CHChests;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,6 +14,8 @@ import cc.polyfrost.oneconfig.events.event.InitializationEvent;
 import net.minecraftforge.fml.common.Mod;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+import java.util.*;
 
 /**
  * The entrypoint of the Example Mod that initializes it.
@@ -34,6 +37,9 @@ public class CHChests {
     private TitaniumFinder titaniumFinder;
     private CHChestsFinder chchestsfinder;
     private MobTracker mobTracker;
+    private List<BlockPos> titaniumList = new ArrayList<BlockPos>();
+    private Set<BlockPos> processedPositions = new HashSet<BlockPos>();
+    private Map<BlockPos, String> blockTextMap = new HashMap<BlockPos, String>();
 
     // Register the config and commands.
     @Mod.EventHandler
@@ -47,9 +53,9 @@ public class CHChests {
     public void preInit(FMLPreInitializationEvent event) {
         structureBuilder = new StructureBuilder(config);
         MinecraftForge.EVENT_BUS.register(structureBuilder);
-        titaniumFinder = new TitaniumFinder(config);
+        titaniumFinder = new TitaniumFinder(config, titaniumList);
         MinecraftForge.EVENT_BUS.register(titaniumFinder);
-        chchestsfinder = new CHChestsFinder(config);
+        chchestsfinder = new CHChestsFinder(config, processedPositions, blockTextMap);
         MinecraftForge.EVENT_BUS.register(chchestsfinder);
 
 
@@ -78,6 +84,11 @@ public class CHChests {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         mobTracker.onKeyPress();
+        if (KeyBindings.clearChests.isPressed()) {
+            titaniumList.clear();
+            blockTextMap.clear();
+            processedPositions.clear();
+        }
     }
 
 

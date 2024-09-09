@@ -24,26 +24,22 @@ import java.util.*;
 
 public class CHChestsFinder {
     private TestConfig config;
+    private Set<BlockPos> processedPositions;
+    private Map<BlockPos, String> blockTextMap;
+    private Map<String, Integer> blockCountMap = new HashMap<String, Integer>();
 
-    public CHChestsFinder(TestConfig c) {
+    public CHChestsFinder(TestConfig c, Set<BlockPos> p, Map<BlockPos, String> b) {
         config = c;
+        processedPositions = p;
+        blockTextMap = b;
     }
-
-    private Map<BlockPos, String> blockTextMap = new HashMap<BlockPos, String>();
 
     public Map<BlockPos, String> getBlockTextMap() {
         return blockTextMap;
     }
 
-    private Set<BlockPos> processedPositions = new HashSet<BlockPos>();
-    private Map<String, Integer> blockCountMap = new HashMap<String, Integer>();
-
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) throws IOException {
-        if (KeyBindings.clearChests.isPressed()) {
-            blockTextMap.clear();
-            processedPositions.clear();
-        }
         if (KeyBindings.findChests.isPressed()) findChests();
     }
 
@@ -1011,7 +1007,7 @@ public class CHChestsFinder {
         double playerY = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks;
         double playerZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks;
 
-        if (!blockTextMap.isEmpty()) {
+        if (!blockTextMap.isEmpty() && config.CrystalHollowsWaypoints) {
             GL11.glPushMatrix();
             GL11.glTranslated(-playerX, -playerY, -playerZ);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
